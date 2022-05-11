@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+<%- include("layouts/header"); -%>
+<!-- Page Title  -->
+<title>Màu sản phẩm</title>
+    <body class="nk-body bg-lighter npc-general has-sidebar">
+        <div class="nk-app-root">
+            <!-- main @s -->
+            <div class="nk-main">
+                <%- include("layouts/sidebar"); -%>
+                    <!-- wrap @s -->
+                    <div class="nk-wrap">
+                        <%- include("layouts/navbar"); -%>
+                            <!-- content @s -->
+                            <div class="nk-content">
+                                <div class="container-fluid">
+                                    <div class="nk-content-inner">
+                                        <div class="nk-content-body">
+                                            <div class="nk-block-head nk-block-head-sm">
+                                                <div class="nk-block-between">
+                                                    <div class="nk-block-head-content">
+                                                        <h3 class="nk-block-title page-title">Màu sắc</h3>
+                                                    </div>
+                                                    <!-- .nk-block-head-content -->
+                                                    <div class="nk-block-head-content">
+                                                        <div class="toggle-wrap nk-block-tools-toggle">
+                                                            <a href="#"
+                                                                class="btn btn-icon btn-trigger toggle-expand mr-n1"
+                                                                data-target="pageMenu"><em
+                                                                    class="icon ni ni-more-v"></em></a>
+                                                            <div class="toggle-expand-content" data-content="pageMenu">
+                                                                <ul class="nk-block-tools g-3">
+                                                                    <li>
+                                                                        <div class="form-control-wrap">
+                                                                            <div class="form-icon form-icon-right">
+                                                                                <em class="icon ni ni-search"></em>
+                                                                            </div>
+                                                                            <input type="text" class="form-control"
+                                                                                id="default-04"
+                                                                                placeholder="Quick search by id" />
+                                                                        </div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div class="drodown">
+                                                                            <a href="#"
+                                                                                class="dropdown-toggle dropdown-indicator btn btn-outline-light btn-white"
+                                                                                data-toggle="dropdown">Status</a>
+                                                                            <div
+                                                                                class="dropdown-menu dropdown-menu-right">
+                                                                                <ul class="link-list-opt no-bdr">
+                                                                                    <li>
+                                                                                        <a href="#"><span>New
+                                                                                                Items</span></a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a
+                                                                                            href="#"><span>Featured</span></a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a href="#"><span>Out of
+                                                                                                Stock</span></a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="nk-block-tools-opt">
+                                                                        <a href="javascript:void(0)"
+                                                                            data-target="addProduct"
+                                                                            class="toggle btn btn-icon btn-primary d-md-none"><em
+                                                                                class="icon ni ni-plus"></em></a>
+                                                                        <a href="javascript:void(0)"
+                                                                            data-target="addProduct"
+                                                                            class="toggle btn btn-primary d-none d-md-inline-flex"><em
+                                                                                class="icon ni ni-plus"></em><span>Thêm
+                                                                                màu mới</span></a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- .nk-block-head-content -->
+                                                </div>
+                                                <!-- .nk-block-between -->
+                                            </div>
+                                            <!-- .nk-block-head -->
+
+                                            <div class="nk-block">
+                                                <div class="card card-bordered">
+                                                    <div class="card-inner-group">
+                                                        <div class="card-inner p-0">
+                                                            <div class="nk-tb-list">
+                                                                <div class="nk-tb-item nk-tb-head">
+                                                                    <div class="nk-tb-col tb-col-sm">
+                                                                        <span>Tên màu</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col"><span>Mã màu</span></div>
+                                                                    <div class="nk-tb-col nk-tb-col-tools"></div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- .nk-tb-list -->
+                                                        </div>
+                                                        <div class="card-inner">
+                                                            <div class="nk-block-between-md g-3">
+                                                                <div class="g">
+                                                                    <ul
+                                                                        class="pagination justify-content-center justify-content-md-start">
+
+                                                                    </ul>
+                                                                    <!-- .pagination -->
+                                                                </div>
+
+                                                            </div>
+                                                            <!-- .nk-block-between -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- .nk-block -->
+
+                                            <div class="nk-add-product toggle-slide toggle-slide-right"
+                                                data-content="addProduct" data-toggle-screen="true"
+                                                data-toggle-overlay="true" data-toggle-body="false" data-simplebar
+                                                id="form-add-product">
+                                                <div class="nk-block-head">
+                                                    <div class="nk-block-head-content">
+                                                        <h5 class="nk-block-title">Màu mới</h5>
+                                                        <div class="nk-block-des">
+                                                            <p>Thêm thông tin và thêm màu mới.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- .nk-block-head -->
+                                                <div class="nk-block">
+                                                    <form class="row g-3" action="/api/colorProducts" method="post"
+                                                        id="form-add-new-color">
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="nameColor">Tên
+                                                                    màu</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" name="nameColor"
+                                                                        class="form-control" id="nameColor"
+                                                                        placeholder="Nhập tên màu sắc" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="codeColor">Mã màu</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" name="codeColor"
+                                                                        class="form-control" id="codeColor"
+                                                                        placeholder="Nhập mã màu" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <button class="btn btn-block btn-primary"
+                                                                id="add-new-color">
+                                                                <em class="icon ni ni-plus"></em><span>Thêm mới</span>
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <!-- .nk-block -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- content @e -->
+                    </div>
+                    <!-- wrap @e -->
+            </div>
+
+        </div>
+        <!-- @@ Profile Edit Modal @e -->
+        <div class="modal fade" role="dialog" id="color-edit">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+                    <div class="modal-body modal-body-lg">
+                        <h5 class="title">Cập nhật màu sắc</h5>
+                        <!-- .nav-tabs -->
+                        <div class="tab-content">
+                            <div class="tab-pane active">
+                                <form action="/api/colorProducts" method="put" id="form-update-color">
+                                    <div class="row gy-4">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-label" for="nameColor">Tên màu</label>
+                                                <input type="text" name="nameColor" class="form-control form-control-lg"
+                                                    id="nameColor-update" placeholder="Nhập tên màu" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-label" for="codeColor">Mã màu</label>
+                                                <input type="text" name="codeColor" class="form-control form-control-lg"
+                                                    id="codeColor-update" placeholder="Nhập mã màu" />
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                                <li>
+                                                    <a href="javascript:void(0)" class="btn btn-lg btn-primary"
+                                                        data-id="" id="updateColor">Cập nhật</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" data-dismiss="modal" class="link link-light">Hủy</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- .tab-content -->
+                    </div>
+                    <!-- .modal-body -->
+                </div>
+                <!-- .modal-content -->
+            </div>
+            <!-- .modal-dialog -->
+        </div>
+        <!-- .modal -->
+
+
+        <!-- @@ Profile Confirm Modal @e -->
+        <div class="modal fade" role="dialog" id="confirm-remove">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+                    <div class="modal-body modal-body-lg">
+                        <h5 class="title">Bạn có chắc muốn xóa nó chứ ?</h5>
+                        <!-- .nav-tabs -->
+                        <div class="tab-content">
+                            <div class="tab-pane active">
+                                <div class="row gy-4">
+                                    <div class="col-12">
+                                        <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                            <li>
+                                                <a href="javascript:void(0)" class="btn btn-lg btn-outline-danger"
+                                                    data-id="" id="DeleteColor">Xóa</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)" data-dismiss="modal"
+                                                    class="link link-light">Hủy</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- .tab-content -->
+                    </div>
+                    <!-- .modal-body -->
+                </div>
+                <!-- .modal-content -->
+            </div>
+            <!-- .modal-dialog -->
+        </div>
+        <!-- .modal -->
+
+        <%- include("layouts/script"); -%>
+            <script type="text/javascript">
+                let currentPage;
+                let totalPages;
+
+                $(document).ready(function () {
+                    selectPage(1)
+
+                    $('#add-new-color').click(function (e) {
+                        e.preventDefault();
+                        let form = $('#form-add-new-color')
+                        $.ajax({
+                            type: $(form).attr('method'),
+                            url: $(form).attr('action'),
+                            data: $(form).serialize(),
+                        })
+                            .done(function (response) {
+                                console.log(response.message);
+                                selectPage(1)
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Thêm mới thành công!",
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                });
+                            })
+                            .fail(function (error) {
+                                console.log(error);
+                            })
+
+                    })
+
+
+                    $("#updateColor").click(function (e) {
+                        let form = $('#form-update-color')
+                        let id = $(this).attr('data-id');
+                        $.ajax({
+                            type: $(form).attr('method'),
+                            url: $(form).attr('action'),
+                            data: $(form).serialize() + '&id=' + id,
+                        })
+                            .done(function (response) {
+                                let colorProduct = response.colorProduct;
+                                console.log(colorProduct);
+                                $(`#${id} .nameColor`).text(colorProduct.nameColor);
+                                $(`#${id} .codeColor`).text(colorProduct.codeColor);
+                                $(`#${id} .color-represent`).css("background-color", colorProduct.codeColor);
+                                $("#color-edit").modal("hide");
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Cập nhật thành công!",
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                });
+                            })
+                            .fail(function (error) {
+                                console.log(error);
+                            })
+                    })
+
+                    $("#DeleteColor").click(function () {
+                        let colorId = $(this).attr('data-id');
+                        console.log(colorId);
+                        $.ajax({
+                            type: 'DELETE',
+                            url: location.protocol + '//' + location.host + `/api/colorProducts`,
+                            data: { colorId }
+                        })
+                            .done(function (response) {
+                                $("#confirm-remove").modal('hide')
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Xóa thành công!",
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                });
+                                selectPage(1)
+
+                            })
+                            .fail(function (error) {
+                                $("#confirm-remove").modal('hide')
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: "Không thể xóa màu này",
+                                })
+                            })
+                    })
+                });
+
+
+
+                function btnEdit(id) {
+                    let nameColor = $(`#${id} .nameColor`).text().trim();
+                    let codeColor = $(`#${id} .codeColor`).text().trim();
+                    $("#updateColor").attr("data-id", id);
+                    $("#nameColor-update").val(nameColor);
+                    $("#codeColor-update").val(codeColor);
+                }
+
+                function btnDelete(id) {
+                    $("#DeleteColor").attr("data-id", id);
+                }
+
+
+                function prevPage() {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        selectPage(currentPage)
+                    }
+                }
+
+                function selectPage(page) {
+                    if ($('.color-item')) {
+                        $('.color-item').remove();
+                    }
+                    $.ajax({
+                        type: 'GET',
+                        url: location.protocol + '//' + location.host + `/api/colorProducts/${page}`,
+                        contentType: 'json',
+                        dataType: "json",
+                    })
+                        .done(function (response) {
+                            console.log(response);
+                            currentPage = response.currentPage;
+                            totalPages = response.totalPages;
+                            let content = '';
+                            response.colorProducts.forEach(item => {
+                                content = '' +
+                                    `<div class="nk-tb-item color-item" id="${item._id}">` +
+                                    '                                                                    <div class="nk-tb-col tb-col-sm">' +
+                                    '                                                                        <span class="tb-product">' +
+                                    ` <span class="color-represent mr-2" style="width: 30px; height: 30px; border-radius: 50%; background-color: ${item.codeColor};"></span>` +
+                                    `                                                                            <span class="title nameColor">${item.nameColor}</span>` +
+                                    '                                                                        </span>' +
+                                    '                                                                    </div>' +
+                                    '                                                                    <div class="nk-tb-col">' +
+                                    `                                                                        <span class="tb-lead codeColor">${item.codeColor}</span>` +
+                                    '                                                                    </div>' +
+                                    '                                                                    <div class="nk-tb-col nk-tb-col-tools">' +
+                                    '                                                                        <ul class="nk-tb-actions gx-1 my-n1">' +
+                                    '                                                                            <li class="mr-n1">' +
+                                    '                                                                                <div class="dropdown">' +
+                                    '                                                                                    <a href="#"' +
+                                    '                                                                                        class="dropdown-toggle btn btn-icon btn-trigger"' +
+                                    '                                                                                        data-toggle="dropdown"><em' +
+                                    '                                                                                            class="icon ni ni-more-h"></em></a>' +
+                                    '                                                                                    <div' +
+                                    '                                                                                        class="dropdown-menu dropdown-menu-right">' +
+                                    '                                                                                        <ul' +
+                                    '                                                                                            class="link-list-opt no-bdr">' +
+                                    '                                                                                            <li>' +
+                                    `                                                                                                <a href="javascript:void(0)" data-toggle="modal" data-target="#color-edit" onclick="btnEdit(\'${item._id}\')"><em` +
+                                    '                                                                                                        class="icon ni ni-edit"></em><span>Sửa' +
+                                    '                                                                                                        Màu</span></a>' +
+                                    '                                                                                            </li>' +
+                                    '' +
+                                    '                                                                                            <li>' +
+                                    `                                                                                                <a href="javascript:void(0)" data-toggle="modal" data-target="#confirm-remove" onclick="btnDelete(\'${item._id}\')"><em` +
+                                    '                                                                                                        class="icon ni ni-trash"></em><span>Xóa' +
+                                    '                                                                                                        Màu</span></a>' +
+                                    '                                                                                            </li>' +
+                                    '                                                                                        </ul>' +
+                                    '                                                                                    </div>' +
+                                    '                                                                                </div>' +
+                                    '                                                                            </li>' +
+                                    '                                                                        </ul>' +
+                                    '                                                                    </div>' +
+                                    '                                                                </div>' +
+                                    '                                                                <!-- .nk-tb-item -->' +
+                                    '';
+                                $(".nk-tb-list").append(content)
+                            })
+
+                            pagination(response);
+                        })
+                        .fail(function (response) {
+
+                        })
+                }
+
+                function nextPage() {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        selectPage(currentPage)
+                    }
+                }
+
+                function pagination(response) {
+                    let data = "";
+                    if (response.currentPage > 1) {
+                        data +=
+                            '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="prevPage()">Prev</a></li>';
+                    }
+                    for (let i = 0; i < response.totalPages; i++) {
+                        data +=
+                            "" +
+                            '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="selectPage(\'' + (i + 1) + "')\" >" + (i + 1) + "</a></li>" + "";
+                    }
+                    if (response.currentPage != response.totalPages && response.totalPages > 0) {
+                        data +=
+                            '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="nextPage()">Next</a></li>';
+                    }
+                    $(".pagination").html(data);
+                }
+            </script>
+    </body>
+
+</html>

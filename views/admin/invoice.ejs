@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+<%- include("layouts/header"); -%>
+<!-- Page Title  -->
+<title>Danh sách hóa đơn</title>
+    <body class="nk-body bg-lighter npc-general has-sidebar">
+        <div class="nk-app-root">
+            <!-- main @s -->
+            <div class="nk-main">
+                <%- include("layouts/sidebar"); -%>
+                    <!-- wrap @s -->
+                    <div class="nk-wrap">
+                        <%- include("layouts/navbar"); -%>
+                            <!-- content @s -->
+                            <div class="nk-content ">
+                                <div class="container-fluid">
+                                    <div class="nk-content-inner">
+                                        <div class="nk-content-body">
+                                            <div class="nk-block-head">
+                                                <div class="nk-block-between g-3">
+                                                    <div class="nk-block-head-content">
+                                                        <h3 class="nk-block-title page-title">Danh sách hóa đơn</h3>
+                                                        <div class="nk-block-des text-soft">
+                                                            <p></p>
+                                                        </div>
+                                                    </div><!-- .nk-block-head-content -->
+                                                </div><!-- .nk-block-between -->
+                                            </div><!-- .nk-block-head -->
+                                            <div class="nk-block">
+                                                <div class="card card-bordered card-stretch">
+                                                    <div class="card-inner-group">
+                                                        <div class="card-inner">
+                                                            <div class="card-title-group">
+                                                                <div class="card-title">
+                                                                    <h5 class="title">Tất cả hóa đơn</h5>
+                                                                </div>
+                                                                <div class="card-tools mr-n1">
+                                                                    <ul class="btn-toolbar">
+                                                                        <li>
+                                                                            <a href="#"
+                                                                                class="btn btn-icon search-toggle toggle-search"
+                                                                                data-target="search"><em
+                                                                                    class="icon ni ni-search"></em></a>
+                                                                        </li><!-- li -->
+                                                                        <li class="btn-toolbar-sep"></li><!-- li -->
+                                                                        <li>
+                                                                            <div class="dropdown">
+                                                                                <a href="#"
+                                                                                    class="btn btn-trigger btn-icon dropdown-toggle"
+                                                                                    data-toggle="dropdown">
+                                                                                    <em class="icon ni ni-setting"></em>
+                                                                                </a>
+                                                                                <div
+                                                                                    class="dropdown-menu dropdown-menu-right dropdown-menu-xs">
+                                                                                    <ul class="link-check">
+                                                                                        <li><span>Show</span></li>
+                                                                                        <li class="active"><a
+                                                                                                href="#">10</a></li>
+                                                                                        <li><a href="#">20</a></li>
+                                                                                        <li><a href="#">50</a></li>
+                                                                                    </ul>
+                                                                                    <ul class="link-check">
+                                                                                        <li><span>Order</span></li>
+                                                                                        <li class="active"><a
+                                                                                                href="#">DESC</a></li>
+                                                                                        <li><a href="#">ASC</a></li>
+                                                                                    </ul>
+                                                                                    <ul class="link-check">
+                                                                                        <li><span>Density</span></li>
+                                                                                        <li class="active"><a
+                                                                                                href="#">Regular</a>
+                                                                                        </li>
+                                                                                        <li><a href="#">Compact</a></li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div><!-- .dropdown -->
+                                                                        </li><!-- li -->
+                                                                    </ul><!-- .btn-toolbar -->
+                                                                </div><!-- card-tools -->
+                                                                <div class="card-search search-wrap"
+                                                                    data-search="search">
+                                                                    <div class="search-content">
+                                                                        <a href="#"
+                                                                            class="search-back btn btn-icon toggle-search"
+                                                                            data-target="search"><em
+                                                                                class="icon ni ni-arrow-left"></em></a>
+                                                                        <input type="text"
+                                                                            class="form-control form-control-sm border-transparent form-focus-none"
+                                                                            placeholder="Quick search by order id">
+                                                                        <button class="search-submit btn btn-icon"><em
+                                                                                class="icon ni ni-search"></em></button>
+                                                                    </div>
+                                                                </div><!-- card-search -->
+                                                            </div><!-- .card-title-group -->
+                                                        </div><!-- .card-inner -->
+                                                        <div class="card-inner p-0">
+                                                            <table class="table table-orders">
+                                                                <thead class="tb-odr-head">
+                                                                    <tr class="tb-odr-item">
+                                                                        <th class="tb-odr-info">
+                                                                            <span class="tb-odr-id w-60">Mã hóa đơn</span>
+                                                                            <span
+                                                                                class="tb-odr-date d-none d-md-inline-block">Ngày tạo</span>
+                                                                        </th>
+                                                                        <th class="tb-odr-amount">
+                                                                            <span class="tb-odr-total">Tổng tiền</span>
+                                                                            <span
+                                                                                class="tb-odr-status d-none d-md-inline-block">Trạng thái</span>
+                                                                        </th>
+                                                                        <th class="tb-odr-action">&nbsp;</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody class="tb-odr-body">
+                                                                    <!-- <tr class="tb-odr-item">
+                                                                        <td class="tb-odr-info">
+                                                                            <span class="tb-odr-id"><a
+                                                                                    href="html/invoice-details.html">#746F5K2</a></span>
+                                                                            <span class="tb-odr-date">23 Jan 2019,
+                                                                                10:45pm</span>
+                                                                        </td>
+                                                                        <td class="tb-odr-amount">
+                                                                            <span class="tb-odr-total">
+                                                                                <span class="amount">$2300.00</span>
+                                                                            </span>
+                                                                            <span class="tb-odr-status">
+                                                                                <span
+                                                                                    class="badge badge-dot badge-success">Complete</span>
+                                                                            </span>
+                                                                        </td>
+                                                                        <td class="tb-odr-action">
+                                                                            <div class="tb-odr-btns d-none d-sm-inline">
+                                                                                <a href="html/invoice-print.html"
+                                                                                    target="_blank"
+                                                                                    class="btn btn-icon btn-white btn-dim btn-sm btn-primary"><em
+                                                                                        class="icon ni ni-printer-fill"></em></a>
+                                                                                <a href="html/invoice-details.html"
+                                                                                    class="btn btn-dim btn-sm btn-primary">View</a>
+                                                                            </div>
+                                                                            <a href="html/invoice-details.html"
+                                                                                class="btn btn-pd-auto d-sm-none"><em
+                                                                                    class="icon ni ni-chevron-right"></em></a>
+                                                                        </td>
+                                                                    </tr> -->
+                                                                    <!-- .tb-odr-item -->
+                                                                </tbody>
+                                                            </table>
+                                                        </div><!-- .card-inner -->
+                                                        <div class="card-inner">
+                                                            <ul class="pagination justify-content-center justify-content-md-start">
+                                                            </ul><!-- .pagination -->
+                                                        </div><!-- .card-inner -->
+                                                    </div><!-- .card-inner-group -->
+                                                </div><!-- .card -->
+                                            </div><!-- .nk-block -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- content @e -->
+                    </div>
+                    <!-- wrap @e -->
+
+            </div>
+        </div>
+        <%- include("layouts/script"); -%>
+            <script type="text/javascript">
+                let currentPage;
+                let totalPages;
+                $(document).ready(function () {
+                    selectPage(1);
+                })
+                function selectPage(page) {
+                    $.ajax({
+                        type: 'GET',
+                        url: location.protocol + '//' + location.host + `/api/orders/${page}`,
+                        contentType: 'json',
+                        dataType: "json",
+                    })
+                        .done(function (response) {
+                            console.log(response);
+                            currentPage = response.currentPage;
+                            totalPages = response.totalPages;
+                            count = response.count;
+                            $(".nk-block-des.text-soft p").text(`Bạn có tổng ${count} hóa đơn.`)
+                            let content = '';
+                            let status;
+                            let colorStatus;
+                            let myDate;
+                            response.orders.forEach(item => {
+                                myDate = new Date(item.createdAt)
+                                myDate = myDate.toLocaleString("vi-VN").split(',')[1];
+                                if (item.status == "0") {
+                                    status = "Cancelled";
+                                    colorStatus = "badge-danger";
+                                }
+                                else if (item.status == "1") {
+                                    status = "Pending";
+                                    colorStatus = "badge-warning";
+                                }
+                                else {
+                                    status = "Complete";
+                                    colorStatus = "badge-success";
+                                }
+                                content += '' +
+                                    '<tr class="tb-odr-item">' +
+                                    '                                                                        <td class="tb-odr-info">' +
+                                    '                                                                            <span class="tb-odr-id w-60"><a' +
+                                    `                                                                                    href="/admin/invoice/${item._id}">#${item._id}</a></span>` +
+                                    `                                                                            <span class="tb-odr-date">${myDate}</span>` +
+                                    '                                                                        </td>' +
+                                    '                                                                        <td class="tb-odr-amount">' +
+                                    '                                                                            <span class="tb-odr-total">' +
+                                    `                                                                                <span class="amount">$${item.total_money}.00</span>` +
+                                    '                                                                            </span>' +
+                                    '                                                                            <span class="tb-odr-status">' +
+                                    '                                                                                <span' +
+                                    `                                                                                    class="badge badge-dot ${colorStatus}">${status}</span>` +
+                                    '                                                                            </span>' +
+                                    '                                                                        </td>' +
+                                    '                                                                        <td class="tb-odr-action">' +
+                                    '                                                                            <div class="tb-odr-btns d-none d-sm-inline">' +
+                                    `                                                                                <a href="/admin/invoice/${item._id}"` +
+                                    '                                                                                    class="btn btn-dim btn-sm btn-primary">View</a>' +
+                                    '                                                                            </div>' +
+                                    `                                                                            <a href="/admin/invoice/${item._id}"` +
+                                    '                                                                                class="btn btn-pd-auto d-sm-none"><em' +
+                                    '                                                                                    class="icon ni ni-chevron-right"></em></a>' +
+                                    '                                                                        </td>' +
+                                    '                                                                    </tr><!-- .tb-odr-item -->' +
+                                    '';
+                            })
+                            $(".tb-odr-body").html(content)
+                            pagination(response);
+                        })
+                        .fail(function (response) {
+                        })
+                    function prevPage() {
+                        if (currentPage > 1) {
+                            currentPage--;
+                            selectPage(currentPage)
+                        }
+                    }
+                    function nextPage() {
+                        if (currentPage < totalPages) {
+                            currentPage++;
+                            selectPage(currentPage)
+                        }
+                    }
+                    function pagination(response) {
+                        let data = "";
+                        if (response.currentPage > 1) {
+                            data +=
+                                '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="prevPage()">Prev</a></li>';
+                        }
+                        for (let i = 0; i < response.totalPages; i++) {
+                            data +=
+                                "" +
+                                '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="selectPage(\'' + (i + 1) + "')\" >" + (i + 1) + "</a></li>" + "";
+                        }
+                        if (response.currentPage != response.totalPages && response.totalPages > 0) {
+                            data +=
+                                '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="nextPage()">Next</a></li>';
+                        }
+                        $(".pagination").html(data);
+                    }
+                }
+            </script>
+    </body>
+
+</html>

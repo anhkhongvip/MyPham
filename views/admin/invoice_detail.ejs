@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+<%- include("layouts/header"); -%>
+<!-- Page Title  -->
+<title>Chi tiết hóa đơn</title>
+    <body class="nk-body bg-lighter npc-general has-sidebar">
+        <div class="nk-app-root">
+            <!-- main @s -->
+            <div class="nk-main">
+                <%- include("layouts/sidebar"); -%>
+                    <!-- wrap @s -->
+                    <div class="nk-wrap">
+                        <%- include("layouts/navbar"); -%>
+                            <!-- content @s -->
+                            <div class="nk-content ">
+                                <div class="container-fluid">
+                                    <div class="nk-content-inner">
+                                        <div class="nk-content-body">
+                                            <div class="nk-block-head">
+                                                <div class="nk-block-between g-3">
+                                                    <div class="nk-block-head-content">
+                                                        <h3 class="nk-block-title page-title">Hóa đơn <strong
+                                                                class="text-primary small">#<%= order._id %></strong></h3>
+                                                    </div>
+                                                    <div class="nk-block-head-content">
+                                                        <a href="/admin/invoice"
+                                                            class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em
+                                                                class="icon ni ni-arrow-left"></em><span>Quay lại</span></a>
+                                                        <a href="/admin/invoice"
+                                                            class="btn btn-icon btn-outline-light bg-white d-inline-flex d-sm-none"><em
+                                                                class="icon ni ni-arrow-left"></em></a>
+                                                    </div>
+                                                </div>
+                                            </div><!-- .nk-block-head -->
+                                            <div class="nk-block">
+                                                <div class="invoice">
+                                                </div><!-- .invoice-actions -->
+                                                <div class="invoice-wrap">
+                                                    <div class="invoice-head">
+                                                        <div class="invoice-contact">
+                                                            <span class="overline-title">Hóa đơn từ</span>
+                                                            <div class="invoice-contact-info">
+                                                                <h4 class="title"></h4>
+                                                                <ul class="list-plain">
+                                                                    <li><em class="icon ni ni-map-pin-fill"></em><span><%= order.address %></span></li>
+                                                                    <li><em class="icon ni ni-call-fill"></em><span><%= order.phone_number %></span></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="invoice-desc">
+                                                            <h3 class="title">Hóa đơn</h3>
+                                                            <ul class="list-plain">
+                                                                <li class="invoice-id"><span>Họ và tên</span>:<span><%= order.fullname %></span></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div><!-- .invoice-head -->
+                                                    <div class="invoice-bills">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="w-250px">Mã sản phẩm</th>
+                                                                        <th class="w-250px">Tên sản phẩm</th>
+                                                                        <th class="w-250px">Giá tiền</th>
+                                                                        <th>Số lượng</th>
+                                                                        <th >Số tiền</th>
+                                                                        
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <% for (var i = 0; i < orderDetails.length; i++) { %>
+                                                                    <tr>
+                                                                        <td>#<%= orderDetails[i].productId %></td>
+                                                                        <td><%= orderDetails[i].nameProduct %></td>
+                                                                        <td>$<%= orderDetails[i].price %></td>
+                                                                        <td><%= orderDetails[i].quantity %></td>
+                                                                        <td>$<%= orderDetails[i].totalMoney %></td>
+                                                                    </tr>
+                                                                    <% } %>
+                                                                </tbody>
+                                                                <tfoot>
+                                                                    <tr>
+                                                                        <td colspan="3"></td>
+                                                                        <td colspan="1">Tổng tiền</td>
+                                                                        <td>$<%= order.total_money %></td>
+                                                                    </tr>
+                                                                </tfoot>
+                                                            </table>
+                                                        </div>
+                                                    </div><!-- .invoice-bills -->
+                                                </div><!-- .invoice-wrap -->
+                                            </div><!-- .invoice -->
+                                        </div><!-- .nk-block -->
+        
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- content @e -->
+                    </div>
+                    <!-- wrap @e -->
+                    
+            </div>
+        </div>
+        <%- include("layouts/script"); -%>
+    </body>
+
+</html>

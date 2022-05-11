@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include("layouts/header"); -%>
+        <!-- Title  -->
+        <title>Đăng ký</title>
+    </head>
+<body>
+    <div class="container">
+        <h3 class="text-center mt-150">Đăng ký</h3>
+        <div class="row justify-content-center mt-3">
+            <div class="col-6">
+                <form id="registerForm" action="/auth/register" method="post">
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="email" name="email" class="form-control" placeholder="Nhập email" id="email" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Mật khẩu</label>
+                      <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu" id="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Tên người dùng</label>
+                        <input type="text" name="username" class="form-control" placeholder="Nhập tên người dùng" id="username">
+                      </div>
+                    <div class="form-group">
+                      <label for="phoneNumber">Số điện thoại</label>
+                      <input type="text" name="phoneNumber" class="form-control" placeholder="Nhập số điện thoại" id="phoneNumber">
+                    </div>
+                    <button class="col-12 btn btn-outline-primary btn-block btn-register">Đăng ký</button>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+    <%- include("layouts/script"); -%>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".btn-register").click(function(e){
+                e.preventDefault();
+                let form = $("#registerForm")
+                $.ajax({
+                    url: form.attr("action"),
+                    method: form.attr("method"),
+                    data: form.serialize()
+                })
+                .done(function(){
+                    console.log("success");
+                })
+                .fail(function(){
+
+                })
+            })  
+        })
+    </script>
+</body>
+</html>

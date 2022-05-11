@@ -1,0 +1,164 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+<%- include("layouts/header"); -%>
+<title>Thanh toán</title>
+    <body>
+        <%- include("layouts/navbar"); -%>
+            <main>
+                <!-- breadcrumb area start -->
+                <div class="breadcrumb-area-3 pt-215 pb-20">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xxl-12">
+                                <div class="breadcrumb-wrapper-2 text-center">
+                                    <h3>Thanh toán</h3>
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb justify-content-center">
+                                            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Thanh toán</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- breadcrumb area end -->
+
+                <!-- checkout-area start -->
+                <section class="checkout-area pb-70">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkbox-form">
+                                    <h3>Thông tin liên hệ</h3>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="checkout-form-list">
+                                                <label>Họ và tên</label>
+                                                <span class="fullname mb-5">
+                                                    <%= order.fullname %>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="checkout-form-list">
+                                                <label>Email</label>
+                                                <span class="email mb-5">
+                                                    <%= order.email %>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="country-select">
+                                                <label>Địa chỉ</label>
+                                                <span class="address mb-5">
+                                                    <%= order.address %>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="checkout-form-list">
+                                                <label>Số điện thoại</label>
+                                                <span class="phone_number mb-5">
+                                                    <%= order.phone_number %>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="your-order mb-30 ">
+                                    <h3>Đơn hàng của bạn</h3>
+                                    <div class="your-order-table table-responsive">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="product-name">Tên sản phẩm</th>
+                                                    <th class="product-total">Tổng tiền</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% for (let i=0; i < orderDetails.length; i++) { %>
+                                                    <tr class="cart_item">
+                                                        <td class="product-name">
+                                                            <%= orderDetails[i].nameProduct %>
+                                                                <strong class="product-quantity"> × <%=
+                                                                        orderDetails[i].quantity %></strong>
+                                                        </td>
+                                                        <td class="product-total"> <span class="amount">$<%=
+                                                                    orderDetails[i].totalMoney %></span> </td>
+                                                    </tr>
+                                                    <% } %>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr class="order-total">
+                                                    <th>Tổng tiền đơn hàng</th>
+                                                    <td><strong><span class="amount">
+                                                                $<%= order.total_money %>
+                                                            </span></strong>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+
+                                    <div class="payment-method">
+                                        <div class="row mt-20">
+                                            <div class="col-12">
+                                                <div id="paypal-button-container"></div>
+
+                                                <!-- <button class="btn btn-primary" id="btnPayPal"><i class="fa-brands fa-cc-paypal pr-5" style="color: #fbc531"></i>Pay with PayPal</button> -->
+                                            </div>
+                                            <!-- <div class="col-6">
+                                                <button class="btn btn-outline-danger btn-block">Cancel order</button>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- checkout-area end -->
+
+            </main>
+            <!-- footer area start -->
+            <%- include("layouts/footer"); -%>
+                <!-- footer area end -->
+
+                <%- include("layouts/script"); -%>
+                    <script src="https://www.paypal.com/sdk/js?client-id=<%= paypalClientId %>"></script>
+                    <script type="text/javascript">
+                        let orderId = location.href.split('/')[4];
+                        console.log(orderId);
+                        paypal.Buttons({
+                            // Sets up the transaction when a payment button is clicked
+                            createOrder: (data, actions) => {
+                                return fetch(`/api/transaction/${orderId}`, {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                    }
+                                }).then(res => {
+                                    if (res.ok) return res.json()
+                                    return res.json().then(json => Promise.reject(json))
+                                }).then(({ id }) => {
+                                    return id;
+                                }).catch(e => {
+                                    console.error(e.error);
+                                })
+
+                            },
+                            // Finalize the transaction after payer approval
+                            onApprove: (data, actions) => {
+                                return actions.order.capture().then(function (orderData) {
+                                    // Successful capture! For dev/demo purposes:
+                                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                                    const transaction = orderData.purchase_units[0].payments.captures[0];
+                                    actions.redirect(`${location.protocol}//${location.host}/thankyou/${orderId}`)
+                                });
+                            }
+                        }).render('#paypal-button-container');
+                    </script>

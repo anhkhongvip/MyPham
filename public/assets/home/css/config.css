@@ -1,0 +1,14 @@
+.error {
+    color: red;
+    font-size: 13px;
+    margin-bottom: 30px; 
+}
+
+
+.basic-login label{
+    margin-top: 10px;
+}
+
+.basic-login input{
+    margin-bottom: 10px;
+}

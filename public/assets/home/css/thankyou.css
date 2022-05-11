@@ -1,0 +1,27 @@
+.banner-thankyou {
+    position: relative;
+}
+.content {
+    position: absolute;
+    left: 0%;
+    bottom: -5%;
+}
+.content-thankyou
+{
+    color: #74b9ff;
+    font-size: 25px;
+}
+
+a.buy-another {
+    text-decoration: none;
+    color: #4cd137;
+    transition: all 0.5s ease-in-out;
+}
+
+a.buy-another i {
+    transition: all 0.4s ease-in-out;
+}
+
+a.buy-another:hover i {
+    transform: translateX(50%);
+}

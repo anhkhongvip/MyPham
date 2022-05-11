@@ -1,0 +1,437 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+<%- include("layouts/header"); -%>
+    <title>Sản phẩm</title>
+
+    <body>
+        <%- include("layouts/navbar"); -%>
+            <main>
+                <!-- breadcrumb area start -->
+                <div class="breadcrumb-area pt-255 pb-265 mb-120" data-background="assets/img/banner/breadcrumb.jpg">
+                    <div class="container">
+                        <div class="breadcrumb-title text-center">
+                            <h2>Sản phẩm</h2>
+                        </div>
+                        <div class="breadcrumb-list">
+                            <a href="/">Trang chủ</a>
+                            <a href="/shop">Sản phẩm</a>
+                            <span>Danh sách sản phẩm</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- breadcrumb area end -->
+
+                <!-- shop area start -->
+                <div class="shop-area mb-70">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xxl-3 col-xl-3 col-lg-4">
+                                <div class="shop-sidebar-area pt-7 pr-60">
+                                    <div class="single-widget pb-50 mb-50">
+                                        <h4 class="widget-title">Danh mục sản phẩm</h4>
+                                        <div class="widget-category-list">
+                                            <% for(let i=0; i < categoryData.length; i++) { %>
+                                                <div class="single-widget-category">
+                                                    <input type="checkbox" id="<%= categoryData[i]._id %>"
+                                                        name="category-item"
+                                                        onclick="handleClickCategory('<%= categoryData[i]._id %>')">
+                                                    <label for="<%= categoryData[i]._id %>">
+                                                        <%= categoryData[i].nameCategory %> <span>( <%=
+                                                                    categoryData[i].quantity %> )</span>
+                                                    </label>
+                                                </div>
+                                                <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xxl-9 col-xl-9 col-lg-8 order-first order-lg-last">
+                                <div class="shop-top-area mb-40">
+                                    <div class="row">
+                                        <div class="col-xxl-4 col-xl-2 col-md-3 col-sm-3">
+                                            <div class="shop-top-left">
+                                                <span class="label mr-15">Xem:</span>
+                                                <div class="nav d-inline-block tab-btn-group" id="nav-tab"
+                                                    role="tablist">
+                                                    <button class="active" data-bs-toggle="tab" data-bs-target="#tab1"
+                                                        type="button"><i class="fas fa-border-none"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xxl-4 col-xl-6 col-md-6 col-sm-6">
+                                            <p class="show-total-result text-sm-center"></p>
+                                        </div>
+                                        <div class="col-xl-4 col-xl-4 col-md-3 col-sm-3">
+                                            <div class="text-sm-end">
+                                                <div class="select-default">
+                                                    <select name="short" id="short" class="shorting-select">
+                                                        <option value="">Mặc định (Sắp xếp)</option>
+                                                        <option value="">Tăng dần</option>
+                                                        <option value="">Giảm dần</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /. shop top area -->
+                                <div class="shop-main-area">
+                                    <div class="tab-content" id="nav-tabContent">
+                                        <div class="tab-pane fade  show active" id="tab1">
+                                            <div class="row pb-20">
+                                                <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                                                    <div class="single-product mb-15 wow fadeInUp" data-wow-delay=".1s">
+                                                        <div class="product-thumb">
+                                                            <img src="assets/img/products/fashion/1.jpg" alt="#">
+                                                            <div class="cart-btn cart-btn-1 p-abs">
+                                                                <a href="#">Add to cart</a>
+                                                            </div>
+                                                            <div class="product-action product-action-1 p-abs">
+                                                                <a href="#" data-bs-toggle="modal"
+                                                                    data-bs-target="#productModal"
+                                                                    class="icon-box icon-box-1">
+                                                                    <i class="fal fa-eye"></i>
+                                                                    <i class="fal fa-eye"></i>
+                                                                </a>
+                                                                <a href="#" class="icon-box icon-box-1">
+                                                                    <i class="fal fa-heart"></i>
+                                                                    <i class="fal fa-heart"></i>
+                                                                </a>
+                                                                <a href="#" class="icon-box icon-box-1">
+                                                                    <i class="fal fa-layer-group"></i>
+                                                                    <i class="fal fa-layer-group"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="product-content">
+                                                            <h4 class="pro-title pro-title-1"><a
+                                                                    href="product-details.html">Simple Stylish Women
+                                                                    Backpack</a></h4>
+                                                            <div class="pro-price">
+                                                                <span>£1.296.00</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="shop-pagination">
+                                        <div class="basic-pagination">
+                                            <nav>
+                                                <ul>
+
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                    <!-- /. shop main area -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- shop area end -->
+
+                    <!-- product modal area start -->
+                    <div class="product__modal-area modal fade" id="productModal" tabindex="-1" role="dialog"
+                        aria-labelledby="productModal" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="product__modal-inner position-relative">
+                                    <div class="product__modal-close">
+                                        <button data-bs-dismiss="modal" aria-label="Close">
+                                            <i class="ti-close"></i>
+                                        </button>
+                                    </div>
+                                    <div class="product__modal-left">
+                                        <div class="tab-content mb-10" id="productModalThumb">
+                                            <div class="tab-pane fade show active" id="pro-1" role="tabpanel"
+                                                aria-labelledby="pro-1-tab">
+                                                <div class="product__modal-thumb w-img">
+                                                    <img src="" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product__modal-right">
+                                        <h3 class="product__modal-title">
+                                            <a href="javascript:void(0)"></a>
+                                        </h3>
+                                        <div class="product__modal-price mb-10">
+                                            <span class="price new-price"></span>
+                                        </div>
+                                        <div class="product__modal-available">
+                                            <p> Trạng thái: <span stock=""></span> </p>
+                                        </div>
+                                        <div class="product__modal-des">
+                                            <p style="margin-bottom: 0;"></p>
+                                        </div>
+                                        <div class="product__modal-color mt-2 mb-2">
+                                            <h5>Màu sắc:</h5>
+                                            <ul class="d-flex">
+                                            </ul>
+                                        </div>
+                                        <div class="product__modal-quantity mb-15">
+                                            <h5>Số lượng:</h5>
+                                            <form action="#">
+                                                <div class="pro-quan-area d-sm-flex align-items-center">
+                                                    <div class="product-quantity mr-20 mb-25">
+                                                        <div class="cart-plus-minus p-relative"><input type="text"
+                                                                value="1" /></div>
+                                                    </div>
+                                                    <div class="product__modal-cart mb-25">
+                                                        <button class="product-modal-cart-btn" data-id="">Thêm vào
+                                                            giỏ</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="product__modal-categories d-sm-flex align-items-center">
+                                            <span>Danh mục: </span><span class="title-category"></span>
+                                        </div>
+                                        <div class="product__modal-share d-sm-flex align-items-center">
+                                            <span>Chia sẻ sản phẩm này: </span>
+                                            <ul>
+                                                <li>
+                                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- product modal area start -->
+
+            </main>
+            <!-- footer area start -->
+            <%- include("layouts/footer"); -%>
+                <!-- footer area end -->
+
+                <%- include("layouts/script"); -%>
+                    <script type="text/javascript">
+                        let currentPage;
+                        let totalPages;
+                        $(document).ready(function () {
+                            selectPage(1)
+                        })
+
+                        function selectPage(page) {
+                            $.ajax({
+                                type: "GET",
+                                url: location.protocol + '//' + location.host + `/api/products/${page}`,
+                                contentType: 'json',
+                                dataType: "json",
+                            })
+                                .done(function (response) {
+                                    currentPage = response.currentPage;
+                                    totalPages = response.totalPages;
+                                    $(".show-total-result").text(`Trang ${currentPage} trên tổng số ${totalPages} trang`)
+                                    let content = "";
+                                    let myDate;
+                                    response.products.forEach(item => {
+                                        content += '' +
+                                            '<div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6">' +
+                                            '                                                    <div class="single-product mb-15 wow fadeInUp" data-wow-delay=".1s">' +
+                                            '                                                        <div class="product-thumb">' +
+                                            `                                                            <img src="/assets/uploads/${item.productImage}" alt="#">` +
+                                            '                                                            <div class="cart-btn cart-btn-1 p-abs">' +
+                                            '                                                                <a href="#">Thêm vào giỏ</a>' +
+                                            '                                                            </div>' +
+                                            '                                                            <div class="product-action product-action-1 p-abs">' +
+                                            '                                                                <a href="#" data-bs-toggle="modal"' +
+                                            '                                                                    data-bs-target="#productModal"' +
+                                            `                                                                    class="icon-box icon-box-1" onclick="btnShowProduct(\'${item._id}\')">` +
+                                            '                                                                    <i class="fal fa-eye"></i>' +
+                                            '                                                                    <i class="fal fa-eye"></i>' +
+                                            '                                                                </a>' +
+                                            '                                                                <a href="#" class="icon-box icon-box-1">' +
+                                            '                                                                    <i class="fal fa-heart"></i>' +
+                                            '                                                                    <i class="fal fa-heart"></i>' +
+                                            '                                                                </a>' +
+                                            '                                                                <a href="#" class="icon-box icon-box-1">' +
+                                            '                                                                    <i class="fal fa-layer-group"></i>' +
+                                            '                                                                    <i class="fal fa-layer-group"></i>' +
+                                            '                                                                </a>' +
+                                            '                                                            </div>' +
+                                            '                                                        </div>' +
+                                            '                                                        <div class="product-content">' +
+                                            '                                                            <h4 class="pro-title pro-title-1"><a' +
+                                            `                                                                    href="javascript:void(0)">${item.nameProduct}</a></h4>` +
+                                            '                                                            <div class="pro-price">' +
+                                            `                                                                <span>$${item.prices}</span>` +
+                                            '                                                            </div>' +
+                                            '                                                        </div>' +
+                                            '                                                    </div>' +
+                                            '                                                </div>' +
+                                            '';
+                                    })
+                                    pagination(response)
+                                    $(".shop-main-area .row").html(content);
+                                })
+                                .fail(function (response) {
+
+                                })
+                        }
+
+
+
+                        function selectPageFilter(page) {
+                            $.ajax({
+                                url: `${location.protocol}//${location.host}/api/filter/${page}`,
+                                method: "POST",
+                                data: { filterCategory }
+                            })
+                                .done(function (response) {
+                                    let content = '';
+                                    currentPage = response.currentPage;
+                                    totalPages = response.totalPages;
+                                    $(".show-total-result").text(`Trang ${currentPage} trên tổng số ${totalPages} trang`)
+                                    response.products.forEach(item => {
+                                        content += '' +
+                                            '<div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6">' +
+                                            '                                                    <div class="single-product mb-15 wow fadeInUp" data-wow-delay=".1s">' +
+                                            '                                                        <div class="product-thumb">' +
+                                            `                                                            <img src="/assets/uploads/${item.productImage}" alt="#">` +
+                                            '                                                            <div class="cart-btn cart-btn-1 p-abs">' +
+                                            '                                                                <a href="#">Thêm vào giỏ</a>' +
+                                            '                                                            </div>' +
+                                            '                                                            <div class="product-action product-action-1 p-abs">' +
+                                            '                                                                <a href="#" data-bs-toggle="modal"' +
+                                            '                                                                    data-bs-target="#productModal"' +
+                                            '                                                                    class="icon-box icon-box-1">' +
+                                            '                                                                    <i class="fal fa-eye"></i>' +
+                                            '                                                                    <i class="fal fa-eye"></i>' +
+                                            '                                                                </a>' +
+                                            '                                                                <a href="#" class="icon-box icon-box-1">' +
+                                            '                                                                    <i class="fal fa-heart"></i>' +
+                                            '                                                                    <i class="fal fa-heart"></i>' +
+                                            '                                                                </a>' +
+                                            '                                                                <a href="#" class="icon-box icon-box-1">' +
+                                            '                                                                    <i class="fal fa-layer-group"></i>' +
+                                            '                                                                    <i class="fal fa-layer-group"></i>' +
+                                            '                                                                </a>' +
+                                            '                                                            </div>' +
+                                            '                                                        </div>' +
+                                            '                                                        <div class="product-content">' +
+                                            '                                                            <h4 class="pro-title pro-title-1"><a' +
+                                            `                                                                    href="javascript:void(0)">${item.nameProduct}</a></h4>` +
+                                            '                                                            <div class="pro-price">' +
+                                            `                                                                <span>$${item.prices}</span>` +
+                                            '                                                            </div>' +
+                                            '                                                        </div>' +
+                                            '                                                    </div>' +
+                                            '                                                </div>' +
+                                            '';
+                                    })
+                                    pagination(response)
+                                    $(".shop-main-area .row").html(content);
+                                })
+                                .fail(function (response) {
+                                    console.log(response);
+                                })
+                        }
+
+                        var filterCategory = [];
+                        function handleClickCategory(id) {
+                            if ($(`#${id}`).is(":checked")) {
+                                filterCategory.push(id)
+                            }
+                            else {
+                                filterCategory = filterCategory.filter(item => item !== id)
+                            }
+
+                            if (filterCategory.length > 0) {
+                                selectPageFilter(1);
+                            }
+                            else {
+                                selectPage(1);
+                            }
+
+                        }
+
+                        function prevPage() {
+                            if (currentPage > 1) {
+                                currentPage--;
+                                if (filterCategory.length > 0) {
+                                    selectPageFilter(currentPage)
+                                }
+                                else {
+                                    selectPage(currentPage)
+                                }
+                            }
+                        }
+
+                        function nextPage() {
+                            if (currentPage < totalPages) {
+                                currentPage++;
+                                if (filterCategory.length > 0) {
+                                    selectPageFilter(currentPage)
+                                }
+                                else {
+                                    selectPage(currentPage)
+                                }
+                            }
+                        }
+
+                        function pagination(response) {
+                            let data = "";
+                            if (response.currentPage > 1) {
+                                data += '' +
+                                    '<li>' +
+                                    '                                                        <a href="javascript:void(0);" onclick="prevPage()">' +
+                                    '                                                            <i class="far fa-angle-left"></i>' +
+                                    '                                                        </a>' +
+                                    '                                                    </li>' +
+                                    '';
+                            }
+                            for (let i = 0; i < response.totalPages; i++) {
+                                if (filterCategory.length > 0) {
+                                    data += '' +
+                                        '<li>' +
+                                        '                                                        <a href="javascript:void(0);" onclick="selectPageFilter(\'' + (i + 1) + "')\">" + (i + 1) + "</a>" +
+                                        '                                                    </li>' +
+                                        '';
+                                }
+                                else {
+                                    data += '' +
+                                        '<li>' +
+                                        '                                                        <a href="javascript:void(0);" onclick="selectPage(\'' + (i + 1) + "')\">" + (i + 1) + "</a>" +
+                                        '                                                    </li>' +
+                                        '';
+                                }
+                            }
+                            if (response.currentPage != response.totalPages && response.totalPages > 0) {
+                                data += '' +
+                                    '<li>' +
+                                    '                                                        <a href="javascript:void(0);" onclick="nextPage()">' +
+                                    '                                                            <i class="far fa-angle-right"></i>' +
+                                    '                                                        </a>' +
+                                    '                                                    </li>' +
+                                    '';
+                            }
+                            $(".basic-pagination nav ul").html(data);
+                        }
+
+
+
+
+
+                    </script>
+    </body>
+
+</html>

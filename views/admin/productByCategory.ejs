@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+<%- include("layouts/header"); -%>
+<!-- Page Title  -->
+<title>Sản phẩm theo danh mục</title>
+    <body class="nk-body bg-lighter npc-general has-sidebar">
+        <div class="nk-app-root">
+            <!-- main @s -->
+            <div class="nk-main">
+                <%- include("layouts/sidebar"); -%>
+                    <!-- wrap @s -->
+                    <div class="nk-wrap">
+                        <%- include("layouts/navbar"); -%>
+                            <!-- content @s -->
+                            <div class="nk-content">
+                                <div class="container-fluid">
+                                    <div class="nk-content-inner">
+                                        <div class="nk-content-body">
+                                            <div class="nk-block-head nk-block-head-sm">
+                                                <div class="nk-block-between">
+                                                    <div class="nk-block-head-content">
+                                                        <h3 class="nk-block-title page-title">Products (<%= category.nameCategory %>)</h3>
+                                                    </div>
+                                                    <!-- .nk-block-head-content -->
+                                                    <div class="nk-block-head-content">
+                                                        <div class="toggle-wrap nk-block-tools-toggle">
+                                                            <a href="#"
+                                                                class="btn btn-icon btn-trigger toggle-expand mr-n1"
+                                                                data-target="pageMenu"><em
+                                                                    class="icon ni ni-more-v"></em></a>
+                                                            <div class="toggle-expand-content" data-content="pageMenu">
+                                                                <ul class="nk-block-tools g-3">
+                                                                    <li>
+                                                                        <div class="form-control-wrap">
+                                                                            <div class="form-icon form-icon-right">
+                                                                                <em class="icon ni ni-search"></em>
+                                                                            </div>
+                                                                            <input type="text" class="form-control"
+                                                                                id="default-04"
+                                                                                placeholder="Quick search by id" />
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="nk-block-tools-opt">
+                                                                        <a href="#" data-target="addProduct"
+                                                                            class="toggle btn btn-icon btn-primary d-md-none"><em
+                                                                                class="icon ni ni-plus"></em></a>
+                                                                        <a href="#" data-target="addProduct" id="btn-addProduct"
+                                                                            class="toggle btn btn-primary d-none d-md-inline-flex"><em
+                                                                                class="icon ni ni-plus"></em><span>Add
+                                                                                Product</span></a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- .nk-block-head-content -->
+                                                </div>
+                                                <!-- .nk-block-between -->
+                                            </div>
+                                            <!-- .nk-block-head -->
+
+                                            <div class="nk-block">
+                                                <div class="card card-bordered">
+                                                    <div class="card-inner-group">
+                                                        <div class="card-inner p-0">
+                                                            <div class="nk-tb-list">
+                                                                <div class="nk-tb-item nk-tb-head">
+                                                                    <div class="nk-tb-col tb-col-sm">
+                                                                        <span>Name</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col"><span>Price</span></div>
+                                                                    <div class="nk-tb-col"><span>Stock</span></div>
+                                                                    <div class="nk-tb-col tb-col-md">
+                                                                        <span>Category</span>
+                                                                    </div>
+                                                                    <div class="nk-tb-col nk-tb-col-tools"></div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- .nk-tb-list -->
+                                                        </div>
+                                                        <div class="card-inner">
+                                                            <div class="nk-block-between-md g-3">
+                                                                <div class="g">
+                                                                    <ul
+                                                                        class="pagination justify-content-center justify-content-md-start">
+
+                                                                    </ul>
+                                                                    <!-- .pagination -->
+                                                                </div>
+
+                                                            </div>
+                                                            <!-- .nk-block-between -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- .nk-block -->
+
+                                            <div class="nk-add-product toggle-slide toggle-slide-right"
+                                                data-content="addProduct" data-toggle-screen="true"
+                                                data-toggle-overlay="true" data-toggle-body="false" data-simplebar
+                                                id="form-add-product">
+                                                <div class="nk-block-head">
+                                                    <div class="nk-block-head-content">
+                                                        <h5 class="nk-block-title">New Product</h5>
+                                                        <div class="nk-block-des">
+                                                            <p>Add information and add new product.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- .nk-block-head -->
+                                                <div class="nk-block">
+                                                    <form class="row g-3" action="/api/products" method="post"
+                                                        enctype="multipart/form-data" id="form-add-new-product">
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="nameProduct">Tên sản
+                                                                    phẩm</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" name="nameProduct"
+                                                                        class="form-control" id="nameProduct"
+                                                                        placeholder="Nhập tên sản phẩm" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="prices">Giá tiền ($)</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" name="prices"
+                                                                        class="form-control" id="prices"
+                                                                        placeholder="Nhập giá sản phẩm" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="stock">Số lượng
+                                                                    hàng</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" name="stock" class="form-control"
+                                                                        id="stock" placeholder="Nhập số lượng hàng" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Màu sắc sản phẩm</label>
+                                                                <div class="form-control-wrap">
+
+                                                                    <select class="form-control" id="colorId"
+                                                                        name="colorId" multiple>
+                                                                        <% for(let i=0; i < colorProducts.length; i++) {
+                                                                            %>
+                                                                            <option value="<%= colorProducts[i]._id %>">
+                                                                                <%= colorProducts[i].nameColor %>
+                                                                            </option>
+                                                                            <% } %>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12 ">
+                                                            <div class="form-group">
+                                                                <label class="form-label" for="description">Mô
+                                                                    tả</label>
+                                                                <div class="form-control-wrap">
+                                                                    <textarea class="form-control no-resize"
+                                                                        name="description" id="description"
+                                                                        placeholder="Hãy nhập mô tả sản phẩm"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Danh mục sản phẩm</label>
+                                                                <div class="form-control-wrap">
+                                                                    <select class="form-control" id="categoryId"
+                                                                        name="categoryId">
+                                                                        <option value="">Lựa chọn danh mục</option>
+                                                                        <% for(let i=0; i < categories.length; i++) { %>
+                                                                            <option value="<%= categories[i]._id %>">
+                                                                                <%= categories[i].nameCategory %>
+                                                                            </option>
+                                                                            <% } %>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <label class="form-label" for="image">Ảnh sản phẩm</label>
+                                                            <div class="form-control-wrap">
+                                                                <div class="custom-file">
+                                                                    <input type="file" class="custom-file-input"
+                                                                        id="image" name="image" />
+                                                                    <label class="custom-file-label" for="image">Chọn
+                                                                        tệp</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <button class="btn btn-block btn-primary"
+                                                                id="add-new-product">
+                                                                <em class="icon ni ni-plus"></em><span>Thêm mới</span>
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <!-- .nk-block -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- content @e -->
+                    </div>
+                    <!-- wrap @e -->
+            </div>
+        </div>
+        <div class="modal fade" role="dialog" id="product-edit">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+                    <div class="modal-body modal-body-lg">
+                        <h5 class="title">Cập nhật sản phẩm</h5>
+                        <!-- .nav-tabs -->
+                        <div class="tab-content">
+                            <div class="tab-pane active">
+                                <form action="/api/products" method="put" enctype="multipart/form-data"
+                                    id="form-update-product">
+                                    <div class="row gy-4">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-label" for="nameProduct">Tên sản phẩm</label>
+                                                <input type="text" name="nameProduct"
+                                                    class="form-control form-control-lg" id="nameProduct-update"
+                                                    placeholder="Nhập tên sản phẩm" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-label" for="prices">Giá tiền ($)</label>
+                                                <input type="text" name="prices" class="form-control form-control-lg"
+                                                    id="prices-update" placeholder="Nhập giá tiền" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-label" for="stock">Số lượng hàng</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" name="stock" class="form-control"
+                                                        id="stock-update" placeholder="Nhập số lượng hàng" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label class="form-label">Màu sắc sản phẩm</label>
+                                                <div class="form-control-wrap">
+
+                                                    <select class="form-select" id="colorId-update"
+                                                        name="colorId" multiple>
+                                                        <% for(let i=0; i < colorProducts.length; i++) {
+                                                            %>
+                                                            <option value="<%= colorProducts[i]._id %>">
+                                                                <%= colorProducts[i].nameColor %>
+                                                            </option>
+                                                            <% } %>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 ">
+                                            <div class="form-group">
+                                                <label class="form-label" for="description-update">Mô
+                                                    tả</label>
+                                                <div class="form-control-wrap">
+                                                    <textarea class="form-control no-resize"
+                                                        name="description" id="description-update"
+                                                        placeholder="Hãy nhập mô tả sản phẩm"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label class="form-label">Danh mục sản phẩm</label>
+                                                <div class="form-control-wrap">
+                                                    <select class="form-control" id="categoryId-update"
+                                                        name="categoryId">
+                                                        <% for(let i=0; i < categories.length; i++) { %>
+                                                            <option value="<%= categories[i]._id %>">
+                                                                <%= categories[i].nameCategory %>
+                                                            </option>
+                                                            <% } %>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label" for="image">Ảnh sản phẩm</label>
+                                            <div class="form-control-wrap">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="image-update"
+                                                        name="image" />
+                                                    <label class="custom-file-label" id="label-image-update"
+                                                        for="image">Chọn tệp</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                                <li>
+                                                    <a href="javascript:void(0)" class="btn btn-lg btn-primary"
+                                                        data-id="" id="updateProduct">Cập nhật</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" data-dismiss="modal" class="link link-light">Hủy</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- .tab-content -->
+                    </div>
+                    <!-- .modal-body -->
+                </div>
+                <!-- .modal-content -->
+            </div>
+            <!-- .modal-dialog -->
+        </div>
+        <!-- .modal -->
+
+        <!-- @@ Profile view product Modal @e -->
+        <div class="modal fade" role="dialog" id="view-product">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                    <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+                    <div class="modal-body modal-body-xl">
+                        <h5 class="title">Chi tiết sản phẩm</h5>
+                        <!-- .nav-tabs -->
+                        <div class="tab-content">
+                            <div class="tab-pane active">
+                                <div class="card card-bordered">
+                                    <div class="card-inner">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <img src="" alt=""
+                                                    class="img-responsive">
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="product-info mt-5">
+                                                    <h2 class="product-title"></h2>
+                                                    <h4 class="product-price text-primary"></h4>
+                                                    <div class="product-description text-soft">
+                                                        <p class="lead"></p>
+                                                    </div>
+                                                    <div class="product-meta">
+                                                        <ul class="d-flex g-3 gx-5">
+                                                            <li>
+                                                                <div class="fs-14px text-muted">Danh mục</div>
+                                                                <div
+                                                                    class="fs-16px fw-bold text-secondary nameCategory">
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="product-meta">
+                                                        <h6 class="title">Màu sắc</h6>
+                                                        <ul class="custom-control-group list-color">
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- .tab-content -->
+                    </div>
+                    <!-- .modal-body -->
+                </div>
+                <!-- .modal-content -->
+            </div>
+            <!-- .modal-dialog -->
+        </div>
+        <!-- .modal -->
+
+        <!-- @@ Profile Confirm Modal @e -->
+        <div class="modal fade" role="dialog" id="confirm-remove">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+                    <div class="modal-body modal-body-lg">
+                        <h5 class="title">Are you sure remove it ?</h5>
+                        <!-- .nav-tabs -->
+                        <div class="tab-content">
+                            <div class="tab-pane active">
+                                <div class="row gy-4">
+                                    <div class="col-12">
+                                        <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                            <li>
+                                                <a href="javascript:void(0)" class="btn btn-lg btn-outline-danger"
+                                                    data-id="" id="DeleteProduct">Delete</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)" data-dismiss="modal" class="link link-light">Cancel</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- .tab-content -->
+                    </div>
+                    <!-- .modal-body -->
+                </div>
+                <!-- .modal-content -->
+            </div>
+            <!-- .modal-dialog -->
+        </div>
+        <!-- .modal -->
+        <%- include("layouts/script"); -%>
+            <script type="text/javascript">
+                let currentPage;
+                let totalPages;
+                let url = location.href; // lấy ra đường dẫn của trang hiện tại
+                let categoryId = url.split('/')[4];
+                $(document).ready(function () {
+                    selectPage(1)
+
+                    $("#btn-addProduct").click(function () {
+                        $(`#categoryId option[value=${categoryId}]`).attr('selected', 'selected');
+                    })
+
+                    $('#add-new-product').click(function (e) {
+                        e.preventDefault();
+                        let form = $('#form-add-new-product')
+                        let data = new FormData(form[0]);
+                        console.log(Array.from(data));
+                        $.ajax({
+                            type: $(form).attr('method'),
+                            url: $(form).attr('action'),
+                            data: data,
+                            processData: false,
+                            contentType: false,
+                        })
+                            .done(function (response) {
+                                if($("#categoryId").val() == categoryId) {
+                                    selectPage(1)
+                                }
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Create successfully!",
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                });
+                            })
+                            .fail(function (error) {
+                                console.log(error);
+                            })
+
+                    })
+
+                    $("#updateProduct").click(function (e) {
+                        let form = $('#form-update-product')
+                        let id = $(this).attr('data-id');
+                        let data = new FormData(form[0]);
+                        data.append("id", id);
+                        console.log(Array.from(data));
+                        $.ajax({
+                            type: $(form).attr('method'),
+                            url: $(form).attr('action'),
+                            data: data,
+                            processData: false,
+                            contentType: false,
+                        })
+                            .done(function (response) {
+                                let product = response.product;
+                                if($("#categoryId-update").val() == categoryId)
+                                {
+                                    $(`#${id} .name-product`).text(product.nameProduct);
+                                    $(`#${id} .prices`).text(product.prices);
+                                    $(`#${id} .stock`).text(product.stock);
+                                    $(`#${id} img`).attr('src', `/assets/uploads/${product.productImage}`);
+                                    $(`#${id} .category`).text(product.categoryId.nameCategory);
+                                    $(`#${id} .category`).attr('data-id', product.categoryId._id);
+                                }
+                                else {
+                                    selectPage(1)
+                                }
+                                $("#product-edit").modal("hide");
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Update successfully!",
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                });
+                            })
+                            .fail(function (error) {
+                                console.log(error);
+                            })
+                    })
+
+                    $("#DeleteProduct").click(function () {
+                        let productId = $(this).attr('data-id');
+                        $.ajax({
+                            type: 'DELETE',
+                            url: location.protocol + '//' + location.host + `/api/products`,
+                            data: { productId }
+                        })
+                        .done(function (response) {
+                            $("#confirm-remove").modal('hide')
+                            Swal.fire({
+                                    icon: "success",
+                                    title: "Delete successfully!",
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                });
+                            selectPage(1)
+                            
+                        })
+                        .fail(function (error) {
+                            $("#confirm-remove").modal('hide')
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: "Can't delete this product",
+                            })
+                        })
+                    })
+                })
+
+                function btnViewDetail(id) {
+                    $.ajax({
+                        type: 'GET',
+                        url: location.protocol + '//' + location.host + `/api/product/${id}`,
+                    })
+                        .done(function (response) {
+                            let product = response.product;
+                            $("#view-product img").attr('src', `/assets/uploads/${product.productImage}`)
+                            $("#view-product .product-title").text(product.nameProduct);
+                            $("#view-product .product-price").text(`$${product.prices}`);
+                            $("#view-product .product-description p").text(product.description);
+                            $("#view-product .nameCategory").text(product.categoryId.nameCategory);
+                            let content = "";
+                            product.colorId.forEach(item => {
+                                content += '' +
+                                    '<li>' +
+                                    '                                                                <div class="custom-control color-control">' +
+                                    `                                                                    <label class="custom-control-label dot dot-xl" style="background-color: ${item.codeColor}"></label>` +
+                                    '                                                                </div>' +
+                                    '                                                            </li>' +
+                                    '';
+                            })
+                            $("#view-product .list-color").html(content);
+
+
+                        })
+                        .fail(function (error) {
+                            data = false;
+                            console.log(error);
+                        })
+                }
+
+                function btnEdit(id) {
+                    $.ajax({
+                        type: 'GET',
+                        url: location.protocol + '//' + location.host + `/api/product/${id}`,
+                    })
+                    .done(function (response) {
+                        let product = response.product;
+                        $("#nameProduct-update").val(product.nameProduct);
+                        $("#prices-update").val(product.prices);
+                        $("#stock-update").val(product.stock);
+                        $("#description-update").val(product.description);
+                        $("#label-image-update").text("Choose file");
+                        product.colorId.forEach(item => {
+                            $(`#colorId-update option[value=${item._id}]`).attr('selected', 'selected');
+                        })
+                        $(`#categoryId-update option[value=${product.categoryId._id}]`).attr('selected', 'selected');
+                    })
+                    .fail(function (error){
+                        console.log(error);
+                    })
+                    $("#updateProduct").attr("data-id", id);
+                }
+
+                function btnDelete(id){
+                    $("#DeleteProduct").attr("data-id", id);
+                }
+                
+                function prevPage() {
+                    if(currentPage > 1) {
+                        currentPage--;
+                        selectPage(currentPage)
+                    }
+                }
+
+                function selectPage(page) {
+                    if ($('.product-item')) {
+                        $('.product-item').remove();
+                    }
+                    $.ajax({
+                        type: 'GET',
+                        url: location.protocol + '//' + location.host + `/api/${categoryId}/products/${page}`,
+                        contentType: 'json',
+                        dataType: "json",
+                    })
+                        .done(function (response) {
+                            console.log(response);
+                            currentPage = response.currentPage;
+                            totalPages = response.totalPages;
+                            let content = '';
+                            response.products.forEach(item => {
+                                content = '' +
+                                `<div class="nk-tb-item product-item" id="${item._id}">` +
+                                    '                                                                    <div class="nk-tb-col tb-col-sm">' +
+                                    '                                                                        <span class="tb-product">' +
+                                    `                                                                            <img src="/assets/uploads/${item.productImage}" alt=""` +
+                                    '                                                                                class="thumb" />' +
+                                    `                                                                            <span class="title name-product">${item.nameProduct}</span>` +
+                                    '                                                                        </span>' +
+                                    '                                                                    </div>' +
+                                    '                                                                    <div class="nk-tb-col">' +
+                                    `                                                                        <span class="tb-lead prices">${item.prices}</span>` +
+                                    '                                                                    </div>' +
+                                    '                                                                    <div class="nk-tb-col">' +
+                                    `                                                                        <span class="tb-sub stock">${item.stock}</span>` +
+                                    '                                                                    </div>' +
+                                    '                                                                    <div class="nk-tb-col tb-col-md">' +
+                                    `                                                                        <span class="tb-sub category" data-id="${item.categoryId._id}">${item.categoryId.nameCategory}</span>` +
+                                    '                                                                    </div>' +
+                                    '                                                                    <div class="nk-tb-col nk-tb-col-tools">' +
+                                    '                                                                        <ul class="nk-tb-actions gx-1 my-n1">' +
+                                    '                                                                            <li class="mr-n1">' +
+                                    '                                                                                <div class="dropdown">' +
+                                    '                                                                                    <a href="#"' +
+                                    '                                                                                        class="dropdown-toggle btn btn-icon btn-trigger"' +
+                                    '                                                                                        data-toggle="dropdown"><em' +
+                                    '                                                                                            class="icon ni ni-more-h"></em></a>' +
+                                    '                                                                                    <div' +
+                                    '                                                                                        class="dropdown-menu dropdown-menu-right">' +
+                                    '                                                                                        <ul' +
+                                    '                                                                                            class="link-list-opt no-bdr">' +
+                                    '                                                                                            <li>' +
+                                    `                                                                                                <a href="javascript:void(0)" data-toggle="modal" data-target="#view-product" onclick="btnViewDetail(\'${item._id}\')"><em` +
+                                    '                                                                                                        class="icon ni ni-eye"></em><span>View' +
+                                    '                                                                                                        Detail</span></a>' +
+                                    '                                                                                            </li>' +
+                                    '                                                                                            <li>' +
+                                    `                                                                                                <a href="javascript:void(0)" data-toggle="modal" data-target="#product-edit" onclick="btnEdit(\'${item._id}\')"><em` +
+                                    '                                                                                                        class="icon ni ni-edit"></em><span>Edit' +
+                                    '                                                                                                        Product</span></a>' +
+                                    '                                                                                            </li>' +
+                                    '' +
+                                    '                                                                                            <li>' +
+                                    `                                                                                                <a href="javascript:void(0)" data-toggle="modal" data-target="#confirm-remove" onclick="btnDelete(\'${item._id}\')"><em` +
+                                    '                                                                                                        class="icon ni ni-trash"></em><span>Remove' +
+                                    '                                                                                                        Product</span></a>' +
+                                    '                                                                                            </li>' +
+                                    '                                                                                        </ul>' +
+                                    '                                                                                    </div>' +
+                                    '                                                                                </div>' +
+                                    '                                                                            </li>' +
+                                    '                                                                        </ul>' +
+                                    '                                                                    </div>' +
+                                    '                                                                </div>' +
+                                    '                                                                <!-- .nk-tb-item -->' +
+                                    '';
+                                $(".nk-tb-list").append(content)
+                            })
+                            pagination(response);
+                        })
+                        .fail(function (response) {
+
+                        })
+                }
+
+                function nextPage() {
+                    if(currentPage < totalPages) {
+                        currentPage++;
+                        selectPage(currentPage)
+                    }
+                }
+
+                function pagination(response) {
+                    let data = "";
+                    if (response.currentPage > 1) {
+                        data +=
+                            '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="prevPage()">Prev</a></li>';
+                    }
+                    for (let i = 0; i < response.totalPages; i++) {
+                        data +=
+                            "" +
+                            '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="selectPage(\'' + (i + 1) + "')\" >" + (i + 1) + "</a></li>" + "";
+                    }
+                    if (response.currentPage != response.totalPages && response.totalPages > 0) {
+                        data +=
+                            '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="nextPage()">Next</a></li>';
+                    }
+                    $(".pagination").html(data);
+                }
+            </script>

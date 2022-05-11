@@ -1,0 +1,173 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+<%- include("../layouts/header"); -%>
+
+    <body>
+        <%- include("../layouts/navbar"); -%>
+            <main>
+                <!-- breadcrumb area start -->
+                <div class="breadcrumb-area-3 pt-215 pb-20">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xxl-12">
+                                <div class="breadcrumb-wrapper-2 text-center">
+                                    <h3>Giỏ hàng của bạn</h3>
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb justify-content-center">
+                                            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- breadcrumb area end -->
+
+                <!-- Cart Area Strat-->
+                <section class="cart-area pt-100 pb-100">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-content table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="product-thumbnail">Hình ảnh</th>
+                                                <th class="cart-product-name">Tên sản phẩm</th>
+                                                <th class="product-price">Giá</th>
+                                                <th class="product-quantity">Số lượng</th>
+                                                <th class="product-subtotal">Tổng tiền</th>
+                                                <th class="product-remove">Xóa</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="coupon-all">
+                                            <div class="coupon2">
+                                                <button class="s-btn s-btn-2" name="update_cart" id="update_cart">Cập nhật giỏ hàng</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-end">
+                                    <div class="col-md-5 ml-auto">
+                                        <div class="cart-page-total">
+                                            <h2>Tổng tiền của giỏ</h2>
+                                            <ul class="mb-20">
+                                                <li>Tổng tiền <span></span></li>
+                                            </ul>
+                                            <a class="s-btn s-btn-2" href="/checkout">Tiếp tục thanh toán</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Cart Area End-->
+
+
+            </main>
+            <!-- footer area start -->
+            <%- include("../layouts/footer"); -%>
+                <!-- footer area end -->
+                <%- include("../layouts/script"); -%>
+                    <script type="text/javascript">
+                        var cart = JSON.parse(localStorage.getItem("cart"))
+                        $(document).ready(function () {
+                            loadProductList();
+                            $("#update_cart").click(() => {
+                                localStorage.setItem("cart", JSON.stringify(cart));
+                                Swal.fire({
+                                                icon: 'success',
+                                                title: 'Cập nhật giỏ hàng thành công!',
+                                                timer: 1500,
+                                })
+                            })
+                            $("#btnCartMini").click(() => {
+                                location.reload();
+                            })
+                        })
+                        function loadProductList() {
+                            if (cart) {
+                                let content = "";
+                                let totalMoney = 0;
+                                let money;
+                                cart.forEach((item, index) => {
+                                    money = Number(item.price) * Number(item.quantity);
+                                    totalMoney += money;
+                                    content += '' +
+                                        `<tr id="product-${item.product_id}">` +
+                                        '                                                <td class="product-thumbnail"><img' +
+                                        `                                                            src="${item.image}" alt=""></td>` +
+                                        `                                                <td class="product-name">${item.name}</td>` +
+                                        `                                                <td class="product-price"><span class="amount">$${item.price}</span></td>` +
+                                        '                                                <td class="product-quantity">' +
+                                        `                                                    <div class="cart-plus-minus"><input type="number" min="1" max="${item.stock}" value="${item.quantity}" onblur="changeValue(\'${item.product_id}\')" /></div>` +
+                                        '                                                </td>' +
+                                        `                                                <td class="product-subtotal"><span class="amount">$${money}</span></td>` +
+                                        `                                                <td class="product-remove" onclick="RemoveProductFromCart(\'${item.product_id}\')"><a href="javascript:void(0)"><i class="fa fa-times"></i></a>` +
+                                        '                                                </td>' +
+                                        '                                            </tr>' +
+                                        '';
+                                })
+                                $(".cart-area tbody").html(content);
+                                $(".cart-page-total span").text(`$${totalMoney}`)
+                            }
+                        }
+                        function RemoveProductFromCart(id)
+                        {
+                            let totalMoney = $(".cart-page-total span").text().replace("$", "");
+                            let subtotal  = $(`#product-${id} .product-subtotal span`).text().replace("$", "");
+                            let index = cart.findIndex(item => item.product_id == id);
+                            let quantity = cart[index].quantity;
+                            cart.splice(index, 1);
+                            totalMoney = Number(totalMoney) - Number(subtotal);
+                            $(`#product-${id}`).remove();
+                            $(".cart-page-total span").text(`$${totalMoney}`);
+                            localStorage.setItem("cart", JSON.stringify(cart));
+                            let countProduct = $("#countProduct").text();
+                            countProduct = Number(countProduct) - Number(quantity);
+                            $("#countProduct").text(countProduct)
+                        }
+
+                        function changeValue(id)
+                        {
+                            let quantity;
+                            let index = cart.findIndex(item => item.product_id == id);
+                            let oldSubtotal = $(`#product-${id} .product-subtotal span`).text().replace("$", "")
+                            let oldQuantity = cart[index].quantity;
+                            console.log(cart[index].stock);
+                            quantity = event.target.value;
+                            if(quantity > Number(cart[index].stock))
+                            {
+                                quantity = Number(cart[index].stock)
+                                $(`#product-${id} .product-quantity input`).val(quantity);
+                            }
+                            
+                            let price = $(`#product-${id} .product-price span`).text().replace("$", "");
+                            let newSubtotal = Number(price) * quantity;
+                            let totalMoney = $(".cart-page-total span").text().replace("$", "")
+                            totalMoney = Number(newSubtotal) - Number(oldSubtotal) + Number(totalMoney);
+                            $(`#product-${id} .product-subtotal span`).text(`$${newSubtotal}`);
+                            $(".cart-page-total span").text(`$${totalMoney}`)
+                            
+                            if(index != -1)
+                            {
+                                cart[index].quantity = quantity;
+                            }
+                            let countProduct = $("#countProduct").text();
+                            countProduct = Number(countProduct) + (Number(quantity) - oldQuantity);
+                            $("#countProduct").text(countProduct)
+                        }
+                    </script>
+    </body>
+
+</html>

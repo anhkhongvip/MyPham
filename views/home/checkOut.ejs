@@ -1,0 +1,195 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+<%- include("layouts/header"); -%>
+<title>Thủ tục thanh toán</title>
+    <body>
+        <%- include("layouts/navbar"); -%>
+            <main>
+                <!-- breadcrumb area start -->
+                <div class="breadcrumb-area-3 pt-215 pb-20">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xxl-12">
+                                <div class="breadcrumb-wrapper-2 text-center">
+                                    <h3>Thủ tục thanh toán</h3>
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb justify-content-center">
+                                            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Thủ tục thanh toán</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- breadcrumb area end -->
+
+                <!-- checkout-area start -->
+                <section class="checkout-area pb-70">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkbox-form">
+                                    <h3>Chi tiết thanh toán</h3>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="checkout-form-list">
+                                                <label>Họ và tên <span class="required">*</span></label>
+                                                <input type="text" name="fullname" id="fullname"
+                                                    placeholder="Nhập họ và tên" />
+                                                <span class="fullname-error"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="checkout-form-list">
+
+                                                <label>Email <span class="required">*</span></label>
+                                                <input type="text" name="email" id="email" value='<%= account.email %>'
+                                                     disabled />
+                                                <span class="email-error"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="country-select">
+                                                <label>Địa chỉ <span class="required">*</span></label>
+                                                <select id="address-select"></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="checkout-form-list">
+                                                <label>Số điện thoại <span class="required">*</span></label>
+                                                <input type="text" id="phone_number" placeholder="Nhập số điện thoại" />
+                                                <span class="phone_number-error"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="your-order mb-30 ">
+                                    <h3>Đơn hàng của bạn</h3>
+                                    <div class="your-order-table table-responsive">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="product-name">Tên sản phẩm</th>
+                                                    <th class="product-total">Tổng tiền</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                            <tfoot>
+                                                <tr class="order-total">
+                                                    <th>Tổng tiền của đơn hàng</th>
+                                                    <td><strong><span class="amount"></span></strong>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+
+                                    <div class="payment-method">
+                                        <div class="order-button-payment mt-20">
+                                            <button class="s-btn s-btn-2 place-order">Đặt hàng</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- checkout-area end -->
+
+            </main>
+            <!-- footer area start -->
+            <%- include("layouts/footer"); -%>
+                <!-- footer area end -->
+
+                <%- include("layouts/script"); -%>
+                    <script type="text/javascript">
+                        var orderDetails = [];
+                        var total_money = 0;
+                        $(document).ready(function () {
+                            getApiCity();
+                            productOrder();
+                            $(".payment-method .place-order").click(() => {
+                                let fullname = $("#fullname").val();
+                                let email = $("#email").val();
+                                let address = $("#address-select").val();
+                                let phone_number = $("#phone_number").val();
+                                let order = { fullname, email, address, phone_number, total_money }
+                                $.ajax({
+                                    method: "POST",
+                                    url: location.protocol + '//' + location.host + '/api/checkout',
+                                    data: {
+                                        order,
+                                        orderDetails
+                                    }
+                                })
+                                    .done(function (response) {
+                                        let orderId = response.orderCreate._id;
+                                        console.log(orderId);
+                                        window.location.replace(`${location.protocol}//${location.host}/payment/${orderId}`)
+                                    })
+                                    .fail(function (response) {
+                                        console.log(response);
+                                    })
+                            })
+                        })
+                        function getApiCity() {
+                            let content = "";
+                            $.ajax({
+                                method: "GET",
+                                url: "https://provinces.open-api.vn/api/?depth2"
+                            })
+                                .done(function (response) {
+                                    if (response) {
+                                        response.forEach(item => {
+                                            content += '' +
+                                                `<option value="${item.name}">${item.name}</option>` +
+                                                '';
+                                        });
+
+                                        $("#address-select").html(content);
+                                    }
+                                })
+                                .fail(function (response) {
+
+                                })
+                        }
+
+                        function productOrder() {
+                            let cart = JSON.parse(localStorage.getItem("cart"));
+                            let content = "";
+                            let money;
+                            cart.forEach(item => {
+                                money = Number(item.price) * Number(item.quantity);
+                                total_money += money;
+                                content += '' +
+                                    '<tr class="cart_item">' +
+                                    '                                                        <td class="product-name">' +
+                                    `                                                            ${item.name} <strong class="product-quantity"> ×` +
+                                    `                                                                ${item.quantity}</strong>` +
+                                    '                                                        </td>' +
+                                    '                                                        <td class="product-total">' +
+                                    `                                                            <span class="amount">$${money}</span>` +
+                                    '                                                        </td>' +
+                                    '                                                    </tr>' +
+                                    '';
+                                orderDetails.push({
+                                    product_id: item.product_id,
+                                    nameProduct: item.name.trim(),
+                                    quantity: item.quantity,
+                                    price: item.price,
+                                    totalMoney: money
+                                })
+                            })
+                            $(".your-order-table table tbody").html(content);
+                            $(".order-total .amount").text(`$${total_money}`);
+                        }
+                    </script>
+
+
+    </body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include("layouts/header"); -%>
+    <!-- Title  -->
+    <title>Đăng nhập</title>
+</head>
+
+<body>
+  <div class="container">
+    <h3 class="text-center mt-150">Đăng nhập</h3>
+    <div class="row justify-content-center mt-3">
+      <div class="col-4">
+        <form id="loginForm" action="/auth/login" method="post">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" class="form-control" placeholder="Nhập email" id="email"
+              aria-describedby="emailHelp">
+          </div>
+          <div class="form-group mt-3">
+            <label for="password">Mật khẩu</label>
+            <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu" id="password">
+          </div>
+          <button class="col-12 btn btn-outline-primary btn-block btn-login mt-3">Đăng nhập</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+  <%- include("layouts/script"); -%>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $(".btn-login").click(function (e) {
+          e.preventDefault();
+          let form = $("#loginForm")
+          $.ajax({
+            url: form.attr("action"),
+            method: form.attr("method"),
+            data: form.serialize()
+          })
+            .done(function (response) {
+              console.log("success");
+              let data = response;
+              if(data.account.isAdmin)
+              { 
+                window.location ='/admin/users'
+              }
+              else {
+                window.location = '/';
+              }
+            })
+            .fail(function (error) {
+
+            })
+        })
+      })
+    </script>
+</body>
+
+</html>

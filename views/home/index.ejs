@@ -1,0 +1,256 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+<%- include("layouts/header"); -%>
+<title>Trang chủ</title>
+    <body>
+        <%- include("layouts/navbar"); -%>
+            <main>
+                <!-- slider area start -->
+                <section class="slider-area pb-20 p-rel">
+                    <div class="slider-active dot-style dot-style-1 dot-right">
+                        <div class="single-slider slider-height" data-background="assets/home/img/slider/slider-1.jpg">
+                        </div>
+                        <div class="single-slider slider-height" data-background="assets/home/img/slider/slider-2.jpg">
+                        </div>
+                        <div class="single-slider slider-height" data-background="assets/home/img/slider/slider-3.jpg">
+                        </div>
+                        <div class="single-slider slider-height" data-background="assets/home/img/slider/slider-1.jpg">
+                        </div>
+                    </div>
+                    <div class="slider-scroll p-abs">
+                        <a href="#category-area"><i class="fal fa-angle-double-down"></i></a>
+                    </div>
+                </section>
+                <!-- slider area end -->
+
+                <!-- category area start -->
+                <div class="category-area pb-75" id="category-area">
+                    <div class="pl-20 pr-20">
+                        <div class="row row-2">
+                            <div class="col-xxl-6 col-xl-6 col-md-6 col-12">
+                                <div class="single-category mb-20 p-rel wow fadeInUp" data-wow-delay=".1s">
+                                    <a href="shop.html">
+                                        <div class="cat-thumb fix">
+                                            <img src="assets/home/img/products/category-1.jpg" alt="#">
+                                        </div>
+                                        <div class="cat-content p-abs bottom-left">
+                                            <h4 class="pb-15">T-Shirt 2021/22</h4>
+                                            <span class="cat-subtitle">
+                                                25
+                                            </span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xxl-6 col-xxl-6 col-xl-6 col-md-6 col-12">
+                                <div class="row row-2">
+                                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                        <a href="shop.html">
+                                            <div class="single-category mb-20 p-rel wow fadeInUp" data-wow-delay=".3s">
+                                                <div class="cat-thumb fix">
+                                                    <img src="/assets/uploads/image-1650423322523.jpg" alt="#">
+                                                </div>
+                                                <div class="cat-content p-abs bottom-left">
+                                                    <h4 class="pb-15">Sweater</h4>
+                                                    <span class="cat-subtitle">
+                                                        30
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                        <a href="shop.html">
+                                            <div class="single-category mb-20 p-rel wow fadeInUp" data-wow-delay=".6s">
+                                                <div class="cat-thumb fix">
+                                                    <img src="/assets/uploads/image-1650422760934.jpg" alt="#">
+                                                </div>
+                                                <div class="cat-content p-abs bottom-left">
+                                                    <h4 class="pb-15">Men's shirts 2021/22</h4>
+                                                    <span class="cat-subtitle">
+                                                        35
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-xxl-12">
+                                        <a href="shop.html">
+                                            <div class="single-category mb-20 p-rel wow fadeInUp" data-wow-delay=".9s">
+                                                <div class="cat-thumb fix">
+                                                    <img src="assets/home/img/products/category-4.jpg" alt="#">
+                                                </div>
+                                                <div class="cat-content p-abs bottom-left">
+                                                    <h4 class="pb-15">Blazer Cotton SS/21</h4>
+                                                    <span class="cat-subtitle">28 Products</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- category area end -->
+
+                <!-- top selling area start -->
+                <div class="top-selling-area top-selling-padding pb-100">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xxl-12">
+                                <div class="section-title top-selling-title text-center pb-47">
+                                    <span class="p-subtitle">Explore The Lookbook</span>
+                                    <h3 class="p-title pb-15 mb-0">Top Selling Products</h3>
+                                    <p class="p-desc">Commodo sociosqu venenatis cras dolor sagittis integer luctus sem
+                                        primis
+                                        eget maecenas.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pb-20">
+                            <% for(let i = 0; i < products.length; i++) { %>
+                                <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6" id="<%= products[i]._id %>">
+                                    <div class="single-product mb-15 wow fadeInUp" data-wow-delay=".<%= (i + 1) * 3%>s">
+                                        <div class="product-thumb">
+                                            <img src="/assets/uploads/<%= products[i].productImage %>" alt="#">
+                                            <div class="cart-btn cart-btn-1 p-abs">
+                                                <a href="#">Thêm vào giỏ</a>
+                                            </div>
+                                            <div class="product-action product-action-1 p-abs">
+                                                <a href="#" class="icon-box icon-box-1"
+                                                    onclick="btnShowProduct('<%= products[i]._id %>')"
+                                                    data-bs-toggle="modal" data-bs-target="#productModal">
+                                                    <i class="fal fa-eye"></i>
+                                                    <i class="fal fa-eye"></i>
+                                                </a>
+                                                <a href="#" class="icon-box icon-box-1">
+                                                    <i class="fal fa-heart"></i>
+                                                    <i class="fal fa-heart"></i>
+                                                </a>
+                                                <a href="#" class="icon-box icon-box-1">
+                                                    <i class="fal fa-layer-group"></i>
+                                                    <i class="fal fa-layer-group"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-content">
+                                            <h4 class="pro-title pro-title-1"><a href="javascript:void(0)">
+                                                    <%= products[i].nameProduct%>
+                                                </a></h4>
+                                            <div class="pro-price">
+                                                <span>$<%= products[i].prices%></span>
+                                                <del></del>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% } %>
+                        </div>
+                        <div class="row">
+                            <div class="col-xxl-12">
+                                <div class="btn-area text-center wow fadeInUp" data-wow-delay="1.2s">
+                                    <div class="p-btn p-btn-1">
+                                        <a href="shop.html">Xem tất cả sản phẩm</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- top selling area end -->
+
+                <!-- product modal area start -->
+                <div class="product__modal-area modal fade" id="productModal" tabindex="-1" role="dialog"
+                    aria-labelledby="productModal" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="product__modal-inner position-relative">
+                                <div class="product__modal-close">
+                                    <button data-bs-dismiss="modal" aria-label="Close">
+                                        <i class="ti-close"></i>
+                                    </button>
+                                </div>
+                                <div class="product__modal-left">
+                                    <div class="tab-content mb-10" id="productModalThumb">
+                                        <div class="tab-pane fade show active" id="pro-1" role="tabpanel"
+                                            aria-labelledby="pro-1-tab">
+                                            <div class="product__modal-thumb w-img">
+                                                <img src="" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product__modal-right">
+                                    <h3 class="product__modal-title">
+                                        <a href="javascript:void(0)"></a>
+                                    </h3>
+                                    <div class="product__modal-price mb-10">
+                                        <span class="price new-price"></span>
+                                    </div>
+                                    <div class="product__modal-available">
+                                        <p> Trạng thái: <span stock=""></span> </p>
+                                    </div>
+                                    <div class="product__modal-des">
+                                        <p style="margin-bottom: 0;"></p>
+                                    </div>
+                                    <div class="product__modal-color mt-2 mb-2">
+                                        <h5>Màu sắc:</h5>
+                                        <ul class="d-flex">
+                                        </ul>
+                                    </div>
+                                    <div class="product__modal-quantity mb-15">
+                                        <h5>Số lượng:</h5>
+                                        <form action="#">
+                                            <div class="pro-quan-area d-sm-flex align-items-center">
+                                                <div class="product-quantity mr-20 mb-25">
+                                                    <div class="cart-plus-minus p-relative"><input type="text"
+                                                            value="1" /></div>
+                                                </div>
+                                                <div class="product__modal-cart mb-25">
+                                                    <button class="product-modal-cart-btn" data-id="">Thêm vào
+                                                        giỏ</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="product__modal-categories d-sm-flex align-items-center">
+                                        <span>Danh mục: </span><span class="title-category"></span>
+                                    </div>
+                                    <div class="product__modal-share d-sm-flex align-items-center">
+                                        <span>Chia sẻ sản phẩm này: </span>
+                                        <ul>
+                                            <li>
+                                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- product modal area start -->
+
+            </main>
+            <!-- footer area start -->
+            <%- include("layouts/footer"); -%>
+                <!-- footer area end -->
+
+                <%- include("layouts/script"); -%>
+                    
+    </body>
+
+</html>

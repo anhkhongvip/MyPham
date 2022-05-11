@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+<%- include("layouts/header"); -%>
+<!-- Page Title  -->
+<title>Danh mục sản phẩm</title>
+  <body class="nk-body bg-lighter npc-general has-sidebar">
+    <div class="nk-app-root">
+      <!-- main @s -->
+      <div class="nk-main">
+        <%- include("layouts/sidebar"); -%>
+          <!-- wrap @s -->
+          <div class="nk-wrap">
+            <%- include("layouts/navbar"); -%>
+              <!-- content @s -->
+              <div class="nk-content">
+                <div class="container-fluid">
+                  <div class="nk-content-inner">
+                    <div class="nk-content-body">
+                      <div class="nk-block-head nk-block-head-sm">
+                        <div class="nk-block-between">
+                          <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">Danh mục sản phẩm</h3>
+                          </div>
+                          <!-- .nk-block-head-content -->
+                          <div class="nk-block-head-content">
+                            <div class="toggle-wrap nk-block-tools-toggle">
+                              <a href="#" class="btn btn-icon btn-trigger toggle-expand mr-n1"
+                                data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
+                              <div class="toggle-expand-content" data-content="pageMenu">
+                                <ul class="nk-block-tools g-3">
+                                  <li>
+                                    <div class="form-control-wrap">
+                                      <div class="form-icon form-icon-right">
+                                        <em class="icon ni ni-search"></em>
+                                      </div>
+                                      <input type="text" class="form-control" id="default-04"
+                                        placeholder="Quick search by id" />
+                                    </div>
+                                  </li>
+                                  <li>
+                                    <div class="drodown">
+                                      <a href="#"
+                                        class="dropdown-toggle dropdown-indicator btn btn-outline-light btn-white"
+                                        data-toggle="dropdown">Status</a>
+                                      <div class="dropdown-menu dropdown-menu-right">
+                                        <ul class="link-list-opt no-bdr">
+                                          <li>
+                                            <a href="#"><span>New Items</span></a>
+                                          </li>
+                                          <li>
+                                            <a href="#"><span>Featured</span></a>
+                                          </li>
+                                          <li>
+                                            <a href="#"><span>Out of Stock</span></a>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                  </li>
+                                  <li class="nk-block-tools-opt">
+                                    <a href="#" data-target="addCategory"
+                                      class="toggle btn btn-icon btn-primary d-md-none"><em
+                                        class="icon ni ni-plus"></em></a>
+                                    <a href="#" data-target="addCategory"
+                                      class="toggle btn btn-primary d-none d-md-inline-flex"><em
+                                        class="icon ni ni-plus"></em><span>Thêm mới</span></a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- .nk-block-head-content -->
+                        </div>
+                        <!-- .nk-block-between -->
+                      </div>
+                      <!-- .nk-block-head -->
+
+                      <div class="nk-block">
+                        <div class="card card-bordered">
+                          <div class="card-inner-group">
+                            <div class="card-inner p-0">
+                              <div class="nk-tb-list">
+                                <div class="nk-tb-item nk-tb-head">
+                                  <div class="nk-tb-col tb-col-sm">
+                                    <span>Tên danh mục</span>
+                                  </div>
+                                  <div class="nk-tb-col tb-col-md">
+                                    <span>Ngày tạo</span>
+                                  </div>
+                                  <div class="nk-tb-col nk-tb-col-tools"></div>
+                                </div>
+                                <!-- .nk-tb-item -->
+                                <% for(let i=0; i < categories.length; i++) {%>
+                                  <div class="nk-tb-item" id="<%= categories[i]._id %>">
+                                    <div class="nk-tb-col tb-col-sm">
+                                      <span class="title nameCategory">
+                                        <%= categories[i].nameCategory %>
+                                      </span>
+                                    </div>
+                                    <div class="nk-tb-col">
+                                      <span class="tb-sub brand">
+                                        <%= categories[i].createdAt.toLocaleDateString("vi-VN")%>
+                                      </span>
+                                    </div>
+                                    <div class="nk-tb-col nk-tb-col-tools">
+                                      <ul class="nk-tb-actions gx-1 my-n1">
+                                        <li class="mr-n1">
+                                          <div class="dropdown">
+                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
+                                              data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                              <ul class="link-list-opt no-bdr">
+                                                <li>
+                                                  <a href="#" data-toggle="modal" data-target="#category-edit"
+                                                    onclick="btnEdit(`<%= categories[i]._id %>`)"><em
+                                                      class="icon ni ni-edit"></em><span>Edit Category</span></a>
+                                                </li>
+                                                <li>
+                                                  <a href="/admin/<%= categories[i]._id %>/products"><em class="icon ni ni-eye"></em><span>View
+                                                      Products</span></a>
+                                                </li>
+                                                <li>
+                                                  <a href="javascript:void(0)" data-toggle="modal" data-target="#confirm-remove" onclick="btnDelete('<%= categories[i]._id %>')"><em class="icon ni ni-trash"></em><span>Remove
+                                                      Category</span></a>
+                                                </li>
+                                              </ul>
+                                            </div>
+                                          </div>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                  <!-- .nk-tb-item -->
+                                  <% } %>
+                              </div>
+
+                              <!-- .nk-tb-list -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- .nk-block -->
+
+                      <div class="nk-add-product toggle-slide toggle-slide-right" data-content="addCategory"
+                        data-toggle-screen="false" data-toggle-overlay="true" data-toggle-body="true" data-simplebar>
+                        <div class="nk-block-head">
+                          <div class="nk-block-head-content">
+                            <h5 class="nk-block-title">Thêm mới danh mục sản phẩm</h5>
+                            <div class="nk-block-des">
+                              <p>Thêm thông tin và thêm danh mục mới.</p>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- .nk-block-head -->
+
+                        <div class="nk-block">
+                          <div class="row g-3">
+                            <div class="col-12">
+                              <div class="form-group">
+                                <label class="form-label" for="nameCategory">Tên danh mục</label>
+                                <div class="form-control-wrap">
+                                  <input type="text" name="nameCategory" class="form-control" id="nameCategory"
+                                    placeholder="Enter category name" />
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <button class="btn btn-block btn-primary" id="addNewCategory">
+                                <em class="icon ni ni-plus"></em><span>Thêm mới</span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- .nk-block -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- content @e -->
+          </div>
+          <!-- wrap @e -->
+      </div>
+    </div>
+
+    <!-- @@ Category Edit Modal @e -->
+    <div class="modal fade" role="dialog" id="category-edit">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+          <div class="modal-body modal-body-lg">
+            <h5 class="title">Cập nhật danh mục</h5>
+            <div class="tab-content">
+              <div class="tab-pane active" id="personal">
+                <div class="row gy-4">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="form-label" for="category-name">Tên danh mục</label>
+                      <input type="text" class="form-control form-control-lg" id="category-name"
+                        placeholder="Enter Category name" />
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                      <li>
+                        <a href="javascript:void(0)" class="btn btn-lg btn-primary" id="btn-update-category"
+                          data-id="">Cập nhật</a>
+                      </li>
+                      <li>
+                        <a href="#" data-dismiss="modal" class="link link-light">Hủy</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- .tab-pane -->
+            </div>
+            <!-- .tab-content -->
+          </div>
+          <!-- .modal-body -->
+        </div>
+        <!-- .modal-content -->
+      </div>
+      <!-- .modal-dialog -->
+    </div>
+    <!-- .modal -->
+
+    <!-- @@ Profile Confirm Modal @e -->
+    <div class="modal fade" role="dialog" id="confirm-remove">
+      <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+          <div class="modal-content">
+              <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
+              <div class="modal-body modal-body-lg">
+                  <h5 class="title">Are you sure remove it ?</h5>
+                  <!-- .nav-tabs -->
+                  <div class="tab-content">
+                      <div class="tab-pane active">
+                          <div class="row gy-4">
+                              <div class="col-12">
+                                  <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                                      <li>
+                                          <a href="javascript:void(0)" class="btn btn-lg btn-outline-danger"
+                                              data-id="" id="DeleteProduct">Delete</a>
+                                      </li>
+                                      <li>
+                                          <a href="javascript:void(0)" data-dismiss="modal" class="link link-light">Cancel</a>
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <!-- .tab-content -->
+              </div>
+              <!-- .modal-body -->
+          </div>
+          <!-- .modal-content -->
+      </div>
+      <!-- .modal-dialog -->
+  </div>
+  <!-- .modal -->
+
+
+    <%- include("layouts/script"); -%>
+      <script type="text/javascript">
+        $(document).ready(function () {
+
+          $("#addNewCategory").click(() => {
+            let nameCategory = $("#nameCategory").val();
+            let formData = { nameCategory};
+            $.ajax({
+              type: "POST",
+              url: location.protocol + "//" + location.host + `/api/categories`,
+              dataType: "json",
+              data: formData,
+            })
+              .done(function (response) {
+                Swal.fire({
+                  icon: "success",
+                  title: "Update successfully!",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                let data = '<li class="nk-menu-item">' +
+                  `                                <a href="/admin/${response.category._id}/products" class="nk-menu-link"><span` +
+                  `                                       class="nk-menu-text">${response.category.nameCategory}</span></a>` +
+                  '                            </li>'
+                $('#list-categories').append(data)
+                loadData()
+              })
+              .fail(function (response) { });
+          });
+
+          function loadData() {
+            let content =
+              "" +
+              '<div class="nk-tb-item nk-tb-head">' +
+              '                                  <div class="nk-tb-col tb-col-sm">' +
+              "                                    <span>Tên danh mục</span>" +
+              "                                  </div>" +
+              '                                  <div class="nk-tb-col tb-col-md">' +
+              "                                    <span>Ngày tạo</span>" +
+              "                                  </div>" +
+              '<div class="nk-tb-col nk-tb-col-tools"></div>' +
+              "                                </div>" +
+              "";
+            $.ajax({
+              type: "GET",
+              url: location.protocol + '//' + location.host + `/api/categories`,
+              dataType: "json",
+            })
+              .done(function (response) {
+                response.category.forEach(function (item, index) {
+                  content +=
+                    "" +
+                    `<div class="nk-tb-item" id="${item._id}">` +
+                    '                                    <div class="nk-tb-col tb-col-sm">' +
+                    '                                      <span class="title nameCategory">' +
+                    `                                        ${item.nameCategory}` +
+                    "                                      </span>" +
+                    "                                    </div>" +
+                    '                                    <div class="nk-tb-col">' +
+                    '                                      <span class="tb-sub">' +
+                    `                                        ${(new Date (item.createdAt)).toLocaleDateString("vi-VN")}` +
+                    "                                      </span>" +
+                    "                                    </div>" +
+                    '                                    <div class="nk-tb-col nk-tb-col-tools">' +
+                    '                                      <ul class="nk-tb-actions gx-1 my-n1">' +
+                    '                                        <li class="mr-n1">' +
+                    '                                          <div class="dropdown">' +
+                    '                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"' +
+                    '                                              data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>' +
+                    '                                            <div class="dropdown-menu dropdown-menu-right">' +
+                    '                                              <ul class="link-list-opt no-bdr">' +
+                    "                                                <li>" +
+                    '                                                  <a href="#" data-toggle="modal" data-target="#category-edit"' +
+                    `                                                     onclick="btnEdit('${item._id}')"><em` +
+                    '                                                      class="icon ni ni-edit"></em><span>Edit Category</span></a>' +
+                    "                                                </li>" +
+                    "                                                <li>" +
+                    `                                                  <a href="/admin/${item._id}/products"><em class="icon ni ni-eye"></em><span>View` +
+                    "                                                      Products</span></a>" +
+                    "                                                </li>" +
+                    "                                                <li>" +
+                    `                                                  <a data-toggle="modal" data-target="#confirm-remove" onclick="btnDelete(\'${item._id}\')"><em class="icon ni ni-trash"></em><span>Remove` +
+                    "                                                      Category</span></a>" +
+                    "                                                </li>" +
+                    "                                              </ul>" +
+                    "                                            </div>" +
+                    "                                          </div>" +
+                    "                                        </li>" +
+                    "                                      </ul>" +
+                    "                                    </div>" +
+                    "                                  </div>" +
+                    "                                  <!-- .nk-tb-item -->" +
+                    "";
+                  $(".nk-tb-list").html(content);
+                })
+              })
+              .fail(function (response) {
+
+              })
+
+          }
+
+          $("#btn-update-category").click(function () {
+            let id = $(this).attr("data-id");
+            let nameCategory = $("#category-name").val();
+            let formData = { id, nameCategory};
+            $.ajax({
+              type: "PUT",
+              url: location.protocol + "//" + location.host + `/api/categories`,
+              dataType: "json",
+              data: formData,
+            })
+              .done(function (response) {
+                $(`#${id} .nameCategory`).text(nameCategory);
+                $("#category-edit").modal("hide");
+                Swal.fire({
+                  icon: "success",
+                  title: "Update successfully!",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              })
+              .fail(function (response) { });
+          });
+
+          $("#DeleteProduct").click(function () {
+                        let categoryId = $(this).attr('data-id');
+                        $.ajax({
+                            type: 'DELETE',
+                            url: location.protocol + '//' + location.host + `/api/categories`,
+                            data: { categoryId }
+                        })
+                        .done(function (response) {
+                            $("#confirm-remove").modal('hide')
+                            Swal.fire({
+                                    icon: "success",
+                                    title: "Delete successfully!",
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                });
+                            loadData()
+                        })
+                        .fail(function (error) {
+                            $("#confirm-remove").modal('hide')
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: "Can't delete this category",
+                            })
+                        })
+                    })
+        });
+
+        function btnEdit(id) {
+          let name = $(`#${id} .nameCategory`).text().trim();
+          let brand = $(`#${id} .brand`).text().trim();
+          console.log(name, id, brand);
+          $("#category-name").val(name);
+          $("#brand-name").val(brand);
+          $("#btn-update-category").attr("data-id", id);
+        }
+
+        function btnDelete(id){
+            $("#DeleteProduct").attr("data-id", id);
+        }
+
+      </script>
+  </body>
+
+</html>
