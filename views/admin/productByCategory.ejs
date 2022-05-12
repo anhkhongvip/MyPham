@@ -30,24 +30,14 @@
                                                                     class="icon ni ni-more-v"></em></a>
                                                             <div class="toggle-expand-content" data-content="pageMenu">
                                                                 <ul class="nk-block-tools g-3">
-                                                                    <li>
-                                                                        <div class="form-control-wrap">
-                                                                            <div class="form-icon form-icon-right">
-                                                                                <em class="icon ni ni-search"></em>
-                                                                            </div>
-                                                                            <input type="text" class="form-control"
-                                                                                id="default-04"
-                                                                                placeholder="Quick search by id" />
-                                                                        </div>
-                                                                    </li>
                                                                     <li class="nk-block-tools-opt">
                                                                         <a href="#" data-target="addProduct"
                                                                             class="toggle btn btn-icon btn-primary d-md-none"><em
                                                                                 class="icon ni ni-plus"></em></a>
                                                                         <a href="#" data-target="addProduct" id="btn-addProduct"
                                                                             class="toggle btn btn-primary d-none d-md-inline-flex"><em
-                                                                                class="icon ni ni-plus"></em><span>Add
-                                                                                Product</span></a>
+                                                                                class="icon ni ni-plus"></em><span>Thêm
+                                                                                Mới</span></a>
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -66,12 +56,12 @@
                                                             <div class="nk-tb-list">
                                                                 <div class="nk-tb-item nk-tb-head">
                                                                     <div class="nk-tb-col tb-col-sm">
-                                                                        <span>Name</span>
+                                                                        <span>Tên sản phẩm</span>
                                                                     </div>
-                                                                    <div class="nk-tb-col"><span>Price</span></div>
-                                                                    <div class="nk-tb-col"><span>Stock</span></div>
+                                                                    <div class="nk-tb-col"><span>Giá tiền</span></div>
+                                                                    <div class="nk-tb-col"><span>Số lượng hàng</span></div>
                                                                     <div class="nk-tb-col tb-col-md">
-                                                                        <span>Category</span>
+                                                                        <span>Danh mục sản phẩm</span>
                                                                     </div>
                                                                     <div class="nk-tb-col nk-tb-col-tools"></div>
                                                                 </div>
@@ -102,9 +92,9 @@
                                                 id="form-add-product">
                                                 <div class="nk-block-head">
                                                     <div class="nk-block-head-content">
-                                                        <h5 class="nk-block-title">New Product</h5>
+                                                        <h5 class="nk-block-title">Sản phẩm mới</h5>
                                                         <div class="nk-block-des">
-                                                            <p>Add information and add new product.</p>
+                                                            <p>Thêm thông tin and thêm mới sản phẩm.</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -400,7 +390,7 @@
                 <div class="modal-content">
                     <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
                     <div class="modal-body modal-body-lg">
-                        <h5 class="title">Are you sure remove it ?</h5>
+                        <h5 class="title">Bạn có chắc muốn xóa nó chứ ?</h5>
                         <!-- .nav-tabs -->
                         <div class="tab-content">
                             <div class="tab-pane active">
@@ -409,10 +399,10 @@
                                         <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
                                             <li>
                                                 <a href="javascript:void(0)" class="btn btn-lg btn-outline-danger"
-                                                    data-id="" id="DeleteProduct">Delete</a>
+                                                    data-id="" id="DeleteProduct">Xóa</a>
                                             </li>
                                             <li>
-                                                <a href="javascript:void(0)" data-dismiss="modal" class="link link-light">Cancel</a>
+                                                <a href="javascript:void(0)" data-dismiss="modal" class="link link-light">Hủy</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -653,19 +643,19 @@
                                     '                                                                                            class="link-list-opt no-bdr">' +
                                     '                                                                                            <li>' +
                                     `                                                                                                <a href="javascript:void(0)" data-toggle="modal" data-target="#view-product" onclick="btnViewDetail(\'${item._id}\')"><em` +
-                                    '                                                                                                        class="icon ni ni-eye"></em><span>View' +
-                                    '                                                                                                        Detail</span></a>' +
+                                    '                                                                                                        class="icon ni ni-eye"></em><span>Xem' +
+                                    '                                                                                                        chi tiết</span></a>' +
                                     '                                                                                            </li>' +
                                     '                                                                                            <li>' +
                                     `                                                                                                <a href="javascript:void(0)" data-toggle="modal" data-target="#product-edit" onclick="btnEdit(\'${item._id}\')"><em` +
-                                    '                                                                                                        class="icon ni ni-edit"></em><span>Edit' +
-                                    '                                                                                                        Product</span></a>' +
+                                    '                                                                                                        class="icon ni ni-edit"></em><span>Sửa' +
+                                    '                                                                                                        sản phẩm</span></a>' +
                                     '                                                                                            </li>' +
                                     '' +
                                     '                                                                                            <li>' +
                                     `                                                                                                <a href="javascript:void(0)" data-toggle="modal" data-target="#confirm-remove" onclick="btnDelete(\'${item._id}\')"><em` +
-                                    '                                                                                                        class="icon ni ni-trash"></em><span>Remove' +
-                                    '                                                                                                        Product</span></a>' +
+                                    '                                                                                                        class="icon ni ni-trash"></em><span>Xóa' +
+                                    '                                                                                                        sản phẩm</span></a>' +
                                     '                                                                                            </li>' +
                                     '                                                                                        </ul>' +
                                     '                                                                                    </div>' +
@@ -696,7 +686,7 @@
                     let data = "";
                     if (response.currentPage > 1) {
                         data +=
-                            '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="prevPage()">Prev</a></li>';
+                            '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="prevPage()">Trước</a></li>';
                     }
                     for (let i = 0; i < response.totalPages; i++) {
                         data +=
@@ -705,7 +695,7 @@
                     }
                     if (response.currentPage != response.totalPages && response.totalPages > 0) {
                         data +=
-                            '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="nextPage()">Next</a></li>';
+                            '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="nextPage()">Tiếp</a></li>';
                     }
                     $(".pagination").html(data);
                 }

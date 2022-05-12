@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <%- include("layouts/header"); -%>
+
+<head>
+    <%- include("layouts/header"); -%>
         <!-- Title  -->
         <title>Đăng ký</title>
-    </head>
+</head>
+
 <body>
     <div class="container">
         <h3 class="text-center mt-150">Đăng ký</h3>
@@ -12,46 +14,95 @@
             <div class="col-6">
                 <form id="registerForm" action="/auth/register" method="post">
                     <div class="form-group">
-                      <label for="email">Email</label>
-                      <input type="email" name="email" class="form-control" placeholder="Nhập email" id="email" aria-describedby="emailHelp">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="Nhập email" id="email"
+                            aria-describedby="emailHelp">
+                        <span class="text-error" id="txt-email"></span>
                     </div>
-                    <div class="form-group">
-                      <label for="password">Mật khẩu</label>
-                      <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu" id="password">
+                    <div class="form-group mt-3">
+                        <label for="password">Mật khẩu</label>
+                        <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu"
+                            id="password">
+                        <span class="text-error" id="txt-password"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-3">
                         <label for="password">Tên người dùng</label>
-                        <input type="text" name="username" class="form-control" placeholder="Nhập tên người dùng" id="username">
-                      </div>
-                    <div class="form-group">
-                      <label for="phoneNumber">Số điện thoại</label>
-                      <input type="text" name="phoneNumber" class="form-control" placeholder="Nhập số điện thoại" id="phoneNumber">
+                        <input type="text" name="username" class="form-control" placeholder="Nhập tên người dùng"
+                            id="username">
+                        <span class="text-error"></span>
                     </div>
-                    <button class="col-12 btn btn-outline-primary btn-block btn-register">Đăng ký</button>
+                    <div class="form-group mt-3">
+                        <label for="phoneNumber">Số điện thoại</label>
+                        <input type="text" name="phoneNumber" class="form-control" placeholder="Nhập số điện thoại"
+                            id="phoneNumber">
+                        <span class="text-error" id="txt-phoneNumber"></span>
+                    </div>
+                    <button class="col-12 btn btn-outline-primary btn-block btn-register mt-3">Đăng ký</button>
                 </form>
             </div>
-            
+
         </div>
     </div>
     <%- include("layouts/script"); -%>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $(".btn-register").click(function(e){
-                e.preventDefault();
-                let form = $("#registerForm")
-                $.ajax({
-                    url: form.attr("action"),
-                    method: form.attr("method"),
-                    data: form.serialize()
-                })
-                .done(function(){
-                    console.log("success");
-                })
-                .fail(function(){
+        <script type="text/javascript">
+            $(document).ready(function () {
+                let isPhoneNumber = /^(\d{10})+$/i;
+                let isPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i;
+                let isEmail = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i;
+
+                $(".btn-register").click(function (e) {
+                    e.preventDefault();
+                    $("#registerForm .form-control").removeClass("border-invalid")
+                    $("#registerForm .text-error").removeClass("invalid").text("");
+                    let email = $("#email").val();
+                    let password = $("#password").val();
+                    let phoneNumber = $("#phoneNumber").val();
+                    let ok = true;
+                    if (!isEmail.test(email)) {
+                        $("#txt-email")
+                            .text("Email bạn nhập không hợp lệ")
+                            .addClass("invalid");
+                        $("#email").addClass("border-invalid");
+                        ok = false;
+                    }
+                    if(!isPassword.test(password)) {
+                        $("#txt-password")
+                            .text("Mật khẩu phải lớn hơn hoặc bằng 8 ký tự")
+                            .addClass("invalid");
+                        $("#password").addClass("border-invalid");
+                        ok = false;
+                    }
+                    if(!isPhoneNumber.test(phoneNumber))
+                    {
+                        $("#txt-phoneNumber")
+                            .text("Số điện thoại bắt buộc phải là số và phải từ 10 số trở lên")
+                            .addClass("invalid");
+                        $("#phoneNumber").addClass("border-invalid");
+                        ok = false;
+                    }
+                    if(ok) {
+                        let form = $("#registerForm")
+                        $.ajax({
+                            url: form.attr("action"),
+                            method: form.attr("method"),
+                            data: form.serialize()
+                        })
+                            .done(function () {
+                                location.href = "/"
+                            })
+                            .fail(function (response) {
+                                console.log(response.responseJSON.error[0]);
+                                 let error = response.responseJSON.error[0];
+                                 $(`#txt-${error.key}`)
+                                    .text(error.err)
+                                    .addClass("invalid");
+                                    $(`#${error.key}`).addClass("border-invalid");
+                            })
+                    }
 
                 })
-            })  
-        })
-    </script>
+            })
+        </script>
 </body>
+
 </html>

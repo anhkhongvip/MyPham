@@ -11165,6 +11165,17 @@ p.checkout-coupon input[type=text]:focus {
     display: block;
   }
 }
+
+.invalid {
+   color: #dc3545;
+}
+.border-invalid {
+  border: 1px solid #dc3545 !important;
+}
+
+.text-error {
+  font-size: 14px;
+}
 /*-----------------------------------------------------------------------------------
 
     Template Name: Sample - Corporate Business Bootstrap4 HTML5 Template

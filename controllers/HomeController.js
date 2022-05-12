@@ -7,7 +7,7 @@ const Account = require("../models/Account")
 class HomeController {
 
     async index(req, res, next) {
-        const products = await Product.find({}).limit(6)
+        const products = await Product.find({}).limit(8)
         const categories = await Category.find({})
         res.render('home/index', { products, categories })
     }

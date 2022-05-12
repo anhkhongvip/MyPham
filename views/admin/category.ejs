@@ -28,35 +28,6 @@
                                 data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
                               <div class="toggle-expand-content" data-content="pageMenu">
                                 <ul class="nk-block-tools g-3">
-                                  <li>
-                                    <div class="form-control-wrap">
-                                      <div class="form-icon form-icon-right">
-                                        <em class="icon ni ni-search"></em>
-                                      </div>
-                                      <input type="text" class="form-control" id="default-04"
-                                        placeholder="Quick search by id" />
-                                    </div>
-                                  </li>
-                                  <li>
-                                    <div class="drodown">
-                                      <a href="#"
-                                        class="dropdown-toggle dropdown-indicator btn btn-outline-light btn-white"
-                                        data-toggle="dropdown">Status</a>
-                                      <div class="dropdown-menu dropdown-menu-right">
-                                        <ul class="link-list-opt no-bdr">
-                                          <li>
-                                            <a href="#"><span>New Items</span></a>
-                                          </li>
-                                          <li>
-                                            <a href="#"><span>Featured</span></a>
-                                          </li>
-                                          <li>
-                                            <a href="#"><span>Out of Stock</span></a>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                    </div>
-                                  </li>
                                   <li class="nk-block-tools-opt">
                                     <a href="#" data-target="addCategory"
                                       class="toggle btn btn-icon btn-primary d-md-none"><em
@@ -113,15 +84,15 @@
                                                 <li>
                                                   <a href="#" data-toggle="modal" data-target="#category-edit"
                                                     onclick="btnEdit(`<%= categories[i]._id %>`)"><em
-                                                      class="icon ni ni-edit"></em><span>Edit Category</span></a>
+                                                      class="icon ni ni-edit"></em><span>Sửa danh mục</span></a>
                                                 </li>
                                                 <li>
-                                                  <a href="/admin/<%= categories[i]._id %>/products"><em class="icon ni ni-eye"></em><span>View
-                                                      Products</span></a>
+                                                  <a href="/admin/<%= categories[i]._id %>/products"><em class="icon ni ni-eye"></em><span>Xem
+                                                      các sản phẩm</span></a>
                                                 </li>
                                                 <li>
-                                                  <a href="javascript:void(0)" data-toggle="modal" data-target="#confirm-remove" onclick="btnDelete('<%= categories[i]._id %>')"><em class="icon ni ni-trash"></em><span>Remove
-                                                      Category</span></a>
+                                                  <a href="javascript:void(0)" data-toggle="modal" data-target="#confirm-remove" onclick="btnDelete('<%= categories[i]._id %>')"><em class="icon ni ni-trash"></em><span>Xóa
+                                                      danh mục</span></a>
                                                 </li>
                                               </ul>
                                             </div>
@@ -160,7 +131,7 @@
                                 <label class="form-label" for="nameCategory">Tên danh mục</label>
                                 <div class="form-control-wrap">
                                   <input type="text" name="nameCategory" class="form-control" id="nameCategory"
-                                    placeholder="Enter category name" />
+                                    placeholder="Nhập danh mục sản phẩm" />
                                 </div>
                               </div>
                             </div>
@@ -231,7 +202,7 @@
           <div class="modal-content">
               <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
               <div class="modal-body modal-body-lg">
-                  <h5 class="title">Are you sure remove it ?</h5>
+                  <h5 class="title">Bạn có chắc muốn xóa nó chứ ?</h5>
                   <!-- .nav-tabs -->
                   <div class="tab-content">
                       <div class="tab-pane active">
@@ -240,10 +211,10 @@
                                   <ul class="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
                                       <li>
                                           <a href="javascript:void(0)" class="btn btn-lg btn-outline-danger"
-                                              data-id="" id="DeleteProduct">Delete</a>
+                                              data-id="" id="DeleteProduct">Xóa</a>
                                       </li>
                                       <li>
-                                          <a href="javascript:void(0)" data-dismiss="modal" class="link link-light">Cancel</a>
+                                          <a href="javascript:void(0)" data-dismiss="modal" class="link link-light">Hủy</a>
                                       </li>
                                   </ul>
                               </div>
@@ -335,15 +306,15 @@
                     "                                                <li>" +
                     '                                                  <a href="#" data-toggle="modal" data-target="#category-edit"' +
                     `                                                     onclick="btnEdit('${item._id}')"><em` +
-                    '                                                      class="icon ni ni-edit"></em><span>Edit Category</span></a>' +
+                    '                                                      class="icon ni ni-edit"></em><span>Sửa danh mục</span></a>' +
                     "                                                </li>" +
                     "                                                <li>" +
-                    `                                                  <a href="/admin/${item._id}/products"><em class="icon ni ni-eye"></em><span>View` +
-                    "                                                      Products</span></a>" +
+                    `                                                  <a href="/admin/${item._id}/products"><em class="icon ni ni-eye"></em><span>Xem` +
+                    "                                                      các sản phẩm</span></a>" +
                     "                                                </li>" +
                     "                                                <li>" +
-                    `                                                  <a data-toggle="modal" data-target="#confirm-remove" onclick="btnDelete(\'${item._id}\')"><em class="icon ni ni-trash"></em><span>Remove` +
-                    "                                                      Category</span></a>" +
+                    `                                                  <a data-toggle="modal" data-target="#confirm-remove" onclick="btnDelete(\'${item._id}\')"><em class="icon ni ni-trash"></em><span>Xóa` +
+                    "                                                      danh mục</span></a>" +
                     "                                                </li>" +
                     "                                              </ul>" +
                     "                                            </div>" +

@@ -13,19 +13,23 @@
     <div class="row justify-content-center mt-3">
       <div class="col-4">
         <form id="loginForm" action="/auth/login" method="post">
+          <div role="alert" id="alert-notification"></div>
           <div class="form-group">
             <label for="email">Email</label>
             <input type="email" name="email" class="form-control" placeholder="Nhập email" id="email"
               aria-describedby="emailHelp">
+            <span class="text-error" id="txt-email"></span>
           </div>
           <div class="form-group mt-3">
             <label for="password">Mật khẩu</label>
             <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu" id="password">
+            <span class="text-error" id="txt-password"></span>
           </div>
+          <span class="mt-2 d-block" style="font-size: 13px;">Bạn chưa có tài khoản? <a href="/register"
+              style="font-size: 13px; color: blue;">Đăng ký ngay</a></span>
           <button class="col-12 btn btn-outline-primary btn-block btn-login mt-3">Đăng nhập</button>
         </form>
       </div>
-
     </div>
   </div>
   <%- include("layouts/script"); -%>
@@ -33,7 +37,32 @@
       $(document).ready(function () {
         $(".btn-login").click(function (e) {
           e.preventDefault();
-          let form = $("#loginForm")
+          let isPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i;
+          let isEmail = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i;
+          $("#loginForm .form-control").removeClass("border-invalid")
+          $("#loginForm .text-error").removeClass("invalid").text("");
+          $('#alert-notification').removeClass("alert alert-danger").text("");
+          let email = $("#email").val()
+          let password = $("#password").val()
+          let ok = true;
+
+          if (!isEmail.test(email)) {
+            $("#txt-email")
+              .text("Email bạn nhập không hợp lệ")
+              .addClass("invalid");
+            $("#email").addClass("border-invalid");
+            ok = false;
+          }
+          if (!isPassword.test(password)) {
+            $("#txt-password")
+              .text("Mật khẩu phải lớn hơn hoặc bằng 8 ký tự")
+              .addClass("invalid");
+            $("#password").addClass("border-invalid");
+            ok = false;
+          }
+
+          if (ok) {
+            let form = $("#loginForm")
           $.ajax({
             url: form.attr("action"),
             method: form.attr("method"),
@@ -42,17 +71,20 @@
             .done(function (response) {
               console.log("success");
               let data = response;
-              if(data.account.isAdmin)
-              { 
-                window.location ='/admin/users'
+              if (data.account.isAdmin) {
+                window.location = '/admin/users'
               }
               else {
                 window.location = '/';
               }
             })
-            .fail(function (error) {
-
+            .fail(function (response) {
+              console.log(response.responseJSON.error[0]);
+              let error = response.responseJSON.error[0];
+              $("#alert-notification").addClass("alert alert-danger").text(error.err)
             })
+          }
+          
         })
       })
     </script>

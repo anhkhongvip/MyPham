@@ -7,7 +7,7 @@
         <%- include("layouts/navbar"); -%>
             <main>
                 <!-- breadcrumb area start -->
-                <div class="breadcrumb-area pt-255 pb-265 mb-120" data-background="assets/img/banner/breadcrumb.jpg">
+                <div class="breadcrumb-area pt-255 pb-265 mb-120" data-background="assets/home/img/img_bg/img-5.jpg">
                     <div class="container">
                         <div class="breadcrumb-title text-center">
                             <h2>Sản phẩm</h2>
@@ -313,7 +313,7 @@
                                             '                                                            <div class="product-action product-action-1 p-abs">' +
                                             '                                                                <a href="#" data-bs-toggle="modal"' +
                                             '                                                                    data-bs-target="#productModal"' +
-                                            '                                                                    class="icon-box icon-box-1">' +
+                                            `                                                                    class="icon-box icon-box-1" onclick="btnShowProduct(\'${item._id}\')">` +
                                             '                                                                    <i class="fal fa-eye"></i>' +
                                             '                                                                    <i class="fal fa-eye"></i>' +
                                             '                                                                </a>' +

@@ -21,7 +21,7 @@ class ProductController {
     }
     //[GET]
     getProducts(req, res, next) {
-        let perPage = 5; //số lượng hiển thị trên 1 trang
+        let perPage = 8; //số lượng hiển thị trên 1 trang
         let page = Number(req.params.page) || 1;
         Product.find().skip((perPage * page) - perPage).limit(perPage).populate('categoryId').exec((err, products) => {
             Product.countDocuments((err, count) => {
@@ -38,7 +38,7 @@ class ProductController {
     //[GET]
     getProductsByCategory(req, res, next)
     {
-        let perPage = 5; //số lượng hiển thị trên 1 trang
+        let perPage = 8; //số lượng hiển thị trên 1 trang
         let page = Number(req.params.page) || 1;
         let categoryId = req.params.categoryId;
         Product.find({ categoryId }).skip((perPage * page) - perPage).limit(perPage).populate('categoryId').exec((err, products) => {

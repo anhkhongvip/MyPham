@@ -30,40 +30,6 @@
                                                                     class="icon ni ni-more-v"></em></a>
                                                             <div class="toggle-expand-content" data-content="pageMenu">
                                                                 <ul class="nk-block-tools g-3">
-                                                                    <li>
-                                                                        <div class="form-control-wrap">
-                                                                            <div class="form-icon form-icon-right">
-                                                                                <em class="icon ni ni-search"></em>
-                                                                            </div>
-                                                                            <input type="text" class="form-control"
-                                                                                id="default-04"
-                                                                                placeholder="Quick search by id" />
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="drodown">
-                                                                            <a href="#"
-                                                                                class="dropdown-toggle dropdown-indicator btn btn-outline-light btn-white"
-                                                                                data-toggle="dropdown">Status</a>
-                                                                            <div
-                                                                                class="dropdown-menu dropdown-menu-right">
-                                                                                <ul class="link-list-opt no-bdr">
-                                                                                    <li>
-                                                                                        <a href="#"><span>New
-                                                                                                Items</span></a>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <a
-                                                                                            href="#"><span>Featured</span></a>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <a href="#"><span>Out of
-                                                                                                Stock</span></a>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
-                                                                    </li>
                                                                     <li class="nk-block-tools-opt">
                                                                         <a href="javascript:void(0)"
                                                                             data-target="addProduct"
@@ -678,19 +644,19 @@
                                     '                                                                                            class="link-list-opt no-bdr">' +
                                     '                                                                                            <li>' +
                                     `                                                                                                <a href="javascript:void(0)" data-toggle="modal" data-target="#view-product" onclick="btnViewDetail(\'${item._id}\')"><em` +
-                                    '                                                                                                        class="icon ni ni-eye"></em><span>View' +
-                                    '                                                                                                        Detail</span></a>' +
+                                    '                                                                                                        class="icon ni ni-eye"></em><span>Xem' +
+                                    '                                                                                                        chi tiết</span></a>' +
                                     '                                                                                            </li>' +
                                     '                                                                                            <li>' +
                                     `                                                                                                <a href="javascript:void(0)" data-toggle="modal" data-target="#product-edit" onclick="btnEdit(\'${item._id}\')"><em` +
-                                    '                                                                                                        class="icon ni ni-edit"></em><span>Edit' +
-                                    '                                                                                                        Product</span></a>' +
+                                    '                                                                                                        class="icon ni ni-edit"></em><span>Sửa' +
+                                    '                                                                                                        sản phẩm</span></a>' +
                                     '                                                                                            </li>' +
                                     '' +
                                     '                                                                                            <li>' +
                                     `                                                                                                <a href="javascript:void(0)" data-toggle="modal" data-target="#confirm-remove" onclick="btnDelete(\'${item._id}\')"><em` +
-                                    '                                                                                                        class="icon ni ni-trash"></em><span>Remove' +
-                                    '                                                                                                        Product</span></a>' +
+                                    '                                                                                                        class="icon ni ni-trash"></em><span>Xóa' +
+                                    '                                                                                                        sản phẩm</span></a>' +
                                     '                                                                                            </li>' +
                                     '                                                                                        </ul>' +
                                     '                                                                                    </div>' +
@@ -722,7 +688,7 @@
                     let data = "";
                     if (response.currentPage > 1) {
                         data +=
-                            '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="prevPage()">Prev</a></li>';
+                            '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="prevPage()">Trước</a></li>';
                     }
                     for (let i = 0; i < response.totalPages; i++) {
                         data +=
@@ -731,7 +697,7 @@
                     }
                     if (response.currentPage != response.totalPages && response.totalPages > 0) {
                         data +=
-                            '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="nextPage()">Next</a></li>';
+                            '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="nextPage()">Tiếp</a></li>';
                     }
                     $(".pagination").html(data);
                 }

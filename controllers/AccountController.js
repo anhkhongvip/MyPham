@@ -9,8 +9,8 @@ class AccountController {
     const foundEmail = await Account.findOne({ email });
     if (foundEmail)
       return res.status(403).json({
-        error: [{ key: "email", err: " Email is already in use " }],
-      });
+        error: [{ key: "email", err: " Email này đã được sử dụng " }],
+    });
     
     const user = await User.create({
       userName: username,
@@ -44,13 +44,13 @@ class AccountController {
           return res.status(200).json({ message: "OK", account });
         } else {
           return res.status(400).json({
-            error: [{ key: "password", err: " Email or Password not match" }],
+            error: [{ message: "error", err: "Email hoặc mật khẩu không chính xác" }],
           });
         }
       });
     } else {
       return res.status(400).json({
-        error: [{ key: "password", err: " Email or Password not match" }],
+        error: [{ key: "password", err: " Email hoặc mật khẩu không chính xác" }],
       });
     }
   }
